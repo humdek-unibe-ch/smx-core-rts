@@ -1,38 +1,29 @@
 # Streamix RTS `smxrts`
 
-The runtime system (RTS) for the coordination language Streamix.
+The runtime system (RTS) library for the coordination language Streamix.
+This library is used by any Streamix box which together with this runtime system may form a Streamix application.
+
+In short, the runtime system spawns box instances as threads and manages the communication amongst the box instances.
+
+## Installation
+
+The release page offers pre-compiled debian packages which can be installed through command line.
 
 ## Building
 
 To build the RTS from scratch run the following commands:
 
-    git clone --recursive https://github.com/moiri/streamix-rts.git git-smxrts
-    make
-    sudo make install
+```sh
+make
+sudo make install
+```
 
-Note that time-triggered nets are executed with RT-Tasks. In order to prevent
-priority-inversion the logging is locked by a mutex (instead of a simple
-rw-lock). This is not necessary if the Streamix network does not have any tt
-nets. In this case the mutex locking of the RTS can be disabled at compile time
-with `make unsafe`.
+Note that time-triggered nets are executed with RT-Tasks.
 
-Requires
- - [`zlog`](https://github.com/HardySimpson/zlog)
-    is added as a git submodule and can be used to compile from source.
-
-    ```
-    cd zlog
-    make
-    sudo make install
-    ```
-
-    **Important Note:** Do not statically link `libzlog`, otherwise the
-    resulting software must be published under
-    [LGPL-v2.1](https://choosealicense.com/licenses/lgpl-2.1/).
-
-    **Impotant Note:** In the context of a TPF installation do **not** use this
-    submodule but refer to the zlog dependency package on the internal
-    [GitLab](http://phhum-a209-cp.unibe.ch:10012/SMX/SMX-deps/SMX-zlog).
+## Dependencies
+- [`smx-dep-zlog`](https://github.com/humdek-unibe-ch/smx-dep-zlog)
+    This library wraps the publicly available [`zlog`](https://github.com/HardySimpson/zlog) library in order to facilitate installing processes.
+    Note that the zlog library was altered slighly to accommodate for a potential priority-inversion problem when using RT threads.
 
  - [`libbson`](http://mongoc.org/libbson/current/index.html)
 
@@ -46,10 +37,6 @@ Requires
     sudo apt install libpthread-stubs0-dev
     ```
 
-    **Important Note:** Do not statically link `libpthread`, otherwise the
-    resulting software must be published under
-    [LGPL-v2.1](https://choosealicense.com/licenses/lgpl-2.1/).
-
  - [`lttng`](https://lttng.org/)
 
     ```
@@ -58,11 +45,7 @@ Requires
     sudo apt-get install liblttng-ust-dev
     ```
 
-## Examples
-Some example can be found in the [root repository of Streamix](https://github.com/moiri/streamix).
-Refer to this repo for compilation instructions.
+## Streamix Applications
 
-## Troubleshooting
-zlog fails if it does not have read access to the configuration file. Make sure
-that the default configuration file as well as a customized version is writable
-by the user executing a Streamix application.
+Look for repositories with the name prefix `smx-app-` for Streamix applications which were built with this runtime system.
+Try [this link](https://github.com/search?q=topic%3Astreamix-app+org%3Ahumdek-unibe-ch+fork%3Atrue&type=repositories) for a list of available Streamix apps.

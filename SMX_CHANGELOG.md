@@ -1,4 +1,15 @@
-# `v0.10.4` (latest)
+# `v1.0.0` (latest)
+
+### Changes
+
+- Debianize directly this repo instead of a wrapper repo
+- Update readme file
+- Remove zlog submodule as the repo uses the `libsmxzlog` library as dependency
+  instead.
+
+
+-------------------
+# `v0.10.4`
 
 ### Bug Fixes
 
