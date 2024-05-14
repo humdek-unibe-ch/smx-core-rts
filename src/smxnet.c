@@ -66,7 +66,7 @@ smx_msg_t* smx_net_collector_read( void* h, smx_collector_t* collector,
                     collector->count );
             return NULL;
         }
-        msg = smx_channel_read( h, ch );
+        msg = smx_channel_await_and_read( h, ch );
     }
     else if( collector->state != SMX_CHANNEL_END )
     {
@@ -576,7 +576,7 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
         smx_channel_set_filter( h, conf_port, 1, "json" );
         smx_set_read_timeout( conf_port, h->conf_port_timeout / 1000,
                 ( h->conf_port_timeout % 1000 ) * 1000000 );
-        msg = smx_channel_read( h, conf_port );
+        msg = smx_channel_await_and_read( h, conf_port );
         if( msg == NULL )
         {
             c_err = smx_get_read_error( conf_port );
@@ -640,9 +640,29 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
         {
             smx_net_report_rate_warning( h );
         }
-        smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_START_IMPL );
-        state = impl( h, h->state );
-        smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END_IMPL );
+        for( int i = 0; i < h->sig->in.count; i++)
+        {
+            rc = smx_channel_await( h, h->sig->in.ports[i] );
+            if( rc < 0 )
+            {
+                break;
+            }
+        }
+        if( rc < 0 )
+        {
+            state = SMX_NET_END;
+            if( rc == SMX_CHANNEL_ERR_TIMEOUT )
+            {
+                state = SMX_NET_CONTINUE;
+            }
+            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_SKIP_IMPL );
+        }
+        else
+        {
+            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_START_IMPL );
+            state = impl( h, h->state );
+            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END_IMPL );
+        }
         state = smx_net_update_state( h, state );
         smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END );
     }

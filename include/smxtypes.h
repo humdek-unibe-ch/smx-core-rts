@@ -189,7 +189,8 @@ enum smx_profiler_action_net_e
     SMX_PROFILER_ACTION_NET_START,      /**< start a net loop. */
     SMX_PROFILER_ACTION_NET_START_IMPL, /**< start a net implementation. */
     SMX_PROFILER_ACTION_NET_END_IMPL,   /**< end a net implementation. */
-    SMX_PROFILER_ACTION_NET_END         /**< end a net loop. */
+    SMX_PROFILER_ACTION_NET_END,        /**< end a net loop. */
+    SMX_PROFILER_ACTION_NET_SKIP_IMPL,  /**< skip a net implementation. */
 };
 
 /**

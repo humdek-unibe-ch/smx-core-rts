@@ -1,4 +1,18 @@
-# `v1.0.0` (latest)
+# `v1.1.0` (latest)
+
+### Changes
+
+- Instead blocking on each channel, a net is blocked at the beginning of a run
+  until all channels are ready. Note that input decoupled channels are always
+  ready. Further, note that channel read timeouts trigger an automatic run
+  restart (logging a `SMX_PROFILER_ACTION_NET_SKIP_IMPL` profiler entry).
+- `smx_channel_read()` is no longer blocking, use
+  `smx_channel_await_and_read()` instead.
+- `smx_channel_await()` blocks until a channel is ready.
+
+
+-------------------
+# `v1.0.0`
 
 ### Changes
 

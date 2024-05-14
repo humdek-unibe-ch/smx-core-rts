@@ -352,6 +352,16 @@ TRACEPOINT_EVENT_INSTANCE(
     )
 )
 
+TRACEPOINT_EVENT_INSTANCE(
+    smx_lttng,
+    smx_net,
+    net_skip_impl,
+    TP_ARGS(
+        int, id_net,
+        const char*, name_net
+    )
+)
+
 #endif /* _LTTNG_TP */
 
 #include <lttng/tracepoint-event.h>

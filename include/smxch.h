@@ -237,6 +237,29 @@
             count, ##__VA_ARGS__ )
 
 /**
+ * Wait for a channel trigger. The function blocks as long as no message is
+ * available at the input. If a read timieout is set, the function will return
+ * with SMX_CHANNEL_ERR_TIMEOUT on timeout. If the channel is decoupled at the
+ * source the function returns 0.
+ *
+ * @param h     pointer to the net handler
+ * @param ch    pointer to the channel
+ * @return      0 on success, channel error on failure.
+ */
+int smx_channel_await( void *h, smx_channel_t* ch );
+
+/**
+ * Read data from the channel. The function blocks as long as no data is
+ * available in the channel. See smx_channel_await() for more information.
+ *
+ * @param h     pointer to the net handler
+ * @param ch    pointer to the channel
+ * @return      pointer to a message structure ::smx_msg_s or NULL if something
+ *              went wrong.
+ */
+smx_msg_t* smx_channel_await_and_read( void *h, smx_channel_t* ch );
+
+/**
  * Change the state of a channel collector. The state is only changed if the
  * current state is differnt than the new state and than the end state.
  *
@@ -309,6 +332,9 @@ void smx_channel_destroy_end( smx_channel_end_t* end );
  * Allows to access the channel and read data. The channel is protected by
  * mutual exclusion. The macro SMX_CHANNEL_READ() provides a convenient
  * interface to access the ports by name.
+ * Note that this function will not wait a message but return immediately if no
+ * data is available.  For blocking behaviour use smx_channel_await_and_read()
+ * instead.
  *
  * @param h     pointer to the net handler
  * @param ch    pointer to the channel

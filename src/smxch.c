@@ -21,6 +21,87 @@
 #include "smxprofiler.h"
 
 /*****************************************************************************/
+int smx_channel_await( void *h, smx_channel_t* ch )
+{
+    int rc = 0;
+    struct timespec ts;
+    int nsec_sum;
+
+    if( ch == NULL )
+    {
+        return -1;
+    }
+
+    if( ch->source == NULL )
+    {
+        SMX_LOG_MAIN( main, fatal, "channel not initialised" );
+        return -1;
+    }
+
+    pthread_mutex_lock( &ch->ch_mutex);
+    while( ch->source->state == SMX_CHANNEL_PENDING && rc == 0 )
+    {
+        smx_profiler_log_ch( h, ch, NULL, SMX_PROFILER_ACTION_CH_READ_BLOCK,
+                ch->fifo->count );
+        SMX_LOG_CH( ch, debug, "waiting for message" );
+        if( ch->source->timeout.tv_sec == 0
+                && ch->source->timeout.tv_nsec == 0 )
+        {
+            rc = pthread_cond_wait( &ch->source->ch_cv, &ch->ch_mutex );
+        }
+        else
+        {
+            clock_gettime( CLOCK_REALTIME, &ts );
+            ts.tv_sec += ch->source->timeout.tv_sec;
+            nsec_sum = ts.tv_nsec + ch->source->timeout.tv_nsec;
+            if( nsec_sum > 1000000000 )
+            {
+                ts.tv_sec++;
+                nsec_sum -= 1000000000;
+            }
+            ts.tv_nsec = nsec_sum;
+            SMX_LOG_CH( ch, debug, "wait timeout set to %ld, %ld",
+                    ch->source->timeout.tv_sec, ch->source->timeout.tv_nsec );
+            rc = pthread_cond_timedwait( &ch->source->ch_cv,
+                    &ch->ch_mutex, &ts );
+        }
+        if( rc == ETIMEDOUT )
+        {
+            ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
+            pthread_mutex_unlock( &ch->ch_mutex );
+            SMX_LOG_CH( ch, debug, "channel read timed out" );
+            return SMX_CHANNEL_ERR_TIMEOUT;
+        }
+        else if( rc != 0 )
+        {
+            ch->source->err = SMX_CHANNEL_ERR_CV;
+            pthread_mutex_unlock( &ch->ch_mutex );
+            SMX_LOG_CH( ch, error,
+                    "channel conditional wait failed with error '%s'",
+                    strerror( rc ) );
+            return SMX_CHANNEL_ERR_CV;
+        }
+    }
+
+    pthread_mutex_unlock( &ch->ch_mutex );
+    return SMX_CHANNEL_ERR_NONE;
+}
+
+/*****************************************************************************/
+smx_msg_t* smx_channel_await_and_read( void *h, smx_channel_t* ch )
+{
+    int rc;
+    rc = smx_channel_await( h, ch );
+
+    if( rc < 0 )
+    {
+        return NULL;
+    }
+
+    return smx_channel_read( h, ch );
+}
+
+/*****************************************************************************/
 void smx_channel_change_collector_state( smx_channel_t* ch,
         smx_channel_state_t state )
 {
@@ -169,12 +250,11 @@ void smx_channel_destroy_end( smx_channel_end_t* end )
 /*****************************************************************************/
 smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
 {
-    int rc = 0;
-    int nsec_sum;
-    struct timespec ts;
     smx_msg_t* msg = NULL;
     if( ch == NULL )
+    {
         return NULL;
+    }
 
     if( ch->source == NULL )
     {
@@ -183,49 +263,6 @@ smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
     }
 
     pthread_mutex_lock( &ch->ch_mutex);
-    while( ch->source->state == SMX_CHANNEL_PENDING && rc == 0 )
-    {
-        smx_profiler_log_ch( h, ch, msg, SMX_PROFILER_ACTION_CH_READ_BLOCK,
-                ch->fifo->count );
-        SMX_LOG_CH( ch, debug, "waiting for message" );
-        if( ch->source->timeout.tv_sec == 0
-                && ch->source->timeout.tv_nsec == 0 )
-        {
-            rc = pthread_cond_wait( &ch->source->ch_cv, &ch->ch_mutex );
-        }
-        else
-        {
-            clock_gettime( CLOCK_REALTIME, &ts );
-            ts.tv_sec += ch->source->timeout.tv_sec;
-            nsec_sum = ts.tv_nsec + ch->source->timeout.tv_nsec;
-            if( nsec_sum > 1000000000 )
-            {
-                ts.tv_sec++;
-                nsec_sum -= 1000000000;
-            }
-            ts.tv_nsec = nsec_sum;
-            SMX_LOG_CH( ch, debug, "wait timeout set to %ld, %ld",
-                    ch->source->timeout.tv_sec, ch->source->timeout.tv_nsec );
-            rc = pthread_cond_timedwait( &ch->source->ch_cv,
-                    &ch->ch_mutex, &ts );
-        }
-        if( rc == ETIMEDOUT )
-        {
-            ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
-            pthread_mutex_unlock( &ch->ch_mutex );
-            SMX_LOG_CH( ch, debug, "channel read timed out" );
-            return NULL;
-        }
-        else if( rc != 0 )
-        {
-            ch->source->err = SMX_CHANNEL_ERR_CV;
-            pthread_mutex_unlock( &ch->ch_mutex );
-            SMX_LOG_CH( ch, error,
-                    "channel conditional wait failed with error '%s'",
-                    strerror( rc ) );
-            return NULL;
-        }
-    }
     switch( ch->type ) {
         case SMX_FIFO:
         case SMX_D_FIFO:

@@ -128,5 +128,8 @@ void smx_profiler_log_net( smx_net_t* net, smx_profiler_action_net_t action )
         case SMX_PROFILER_ACTION_NET_END:
             tracepoint_net(net_end);
             break;
+        case SMX_PROFILER_ACTION_NET_SKIP_IMPL:
+            tracepoint_net(net_skip_impl);
+            break;
     }
 }
