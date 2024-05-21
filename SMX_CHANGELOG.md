@@ -1,4 +1,15 @@
-# `v1.0.0` (latest)
+# `v1.0.1` (latest)
+
+### New Features
+
+- Allow to activate a blocking read operation from a decoupled input port with
+  the macro `SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK()`. Use this in a source
+  box which must be externally triggered to start data capture (e.g. audio
+  playback).
+
+
+-------------------
+# `v1.0.0`
 
 ### Changes
 
