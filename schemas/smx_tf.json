@@ -1,0 +1,17 @@
+{
+  "$id": "schemas/smx_rn.json",
+  "$schema": "http://json-schema.org/draft/2019-09/schema#",
+  "additionalProperties": false,
+  "definitions": {},
+  "properties": {
+    "comment": {
+      "type": "string"
+    },
+    "do_copy": {
+      "default": false,
+      "description": "Ususally, a temporal firewall is not duplicating the last available message when no message is in the (output-decoupled) input channel. However, when enabling this option, messages are duplicated, hence, the temporal firewal acts like a normal net.",
+      "type": "boolean"
+    }
+  },
+  "type": "object"
+}

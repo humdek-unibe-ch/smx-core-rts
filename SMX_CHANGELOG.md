@@ -6,6 +6,7 @@
   the macro `SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK()`. Use this in a source
   box which must be externally triggered to start data capture (e.g. audio
   playback).
+- Add JSON schemas for `smx_rn` and `smx_tf`.
 
 
 -------------------
