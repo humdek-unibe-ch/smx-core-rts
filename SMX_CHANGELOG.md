@@ -1,4 +1,4 @@
-# `v1.0.1` (latest)
+# `v1.0.1` (unreleased)
 
 ### New Features
 
@@ -10,7 +10,7 @@
 
 
 -------------------
-# `v1.0.0`
+# `v1.0.0` (latest)
 
 ### Changes
 
