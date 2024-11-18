@@ -1,6 +1,8 @@
 doc/man/man3/box_smx_rn.h.3
 doc/man/man3/BOX_SMX_RN_H.3
 doc/man/man3/box_smx_tf.h.3
+doc/man/man3/smx_channel_activate_decoupled_read_block.3
+doc/man/man3/SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK.3
 doc/man/man3/smx_channel_change_collector_state.3
 doc/man/man3/smx_channel_change_read_state.3
 doc/man/man3/smx_channel_change_write_state.3
