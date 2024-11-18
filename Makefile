@@ -21,9 +21,8 @@ ANAME = $(LLIBNAME).a
 
 TGT_INCLUDE = $(DESTDIR)/usr/include/smx/$(VLIBNAME)
 TGT_LIB = $(DESTDIR)/usr/lib/x86_64-linux-gnu
-TGT_DOC = $(DESTDIR)/usr/share/doc/smx
-TGT_CONF = $(DESTDIR)/usr/etc/smx
-TGT_LOG = $(DESTDIR)/var/log/smx
+TGT_DOC = $(DESTDIR)/usr/share/doc/$(LLIBNAME)$(LIB_VERSION)
+TGT_CONF = $(DESTDIR)/etc/smx/$(LLIBNAME)$(LIB_VERSION)
 
 STATLIB = $(LOC_LIB_DIR)/$(LLIBNAME).a
 DYNLIB = $(LOC_LIB_DIR)/$(LLIBNAME).so
@@ -79,9 +78,10 @@ $(CREATE_DIR):
 	mkdir -p $@
 
 install:
-	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF) $(TGT_LOG)
+	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF)
 	cp -a $(INCLUDES) $(TGT_INCLUDE)/.
 	cp -a $(LOC_LIB_DIR)/$(LLIBNAME).so $(TGT_LIB)/$(SONAME)
+	cp -ar schemas $(TGT_CONF)/.
 	ln -sf $(SONAME) $(TGT_LIB)/$(VLIBNAME).so
 	ln -sf $(SONAME) $(TGT_LIB)/$(LLIBNAME).so
 
@@ -90,6 +90,7 @@ uninstall:
 	rm $(TGT_LIB)/$(SONAME)
 	rm $(TGT_LIB)/$(VLIBNAME).so
 	rm $(TGT_LIB)/$(LLIBNAME).so
+	rm -r $(TGT_CONF)
 
 clean:
 	rm -rf $(LOC_LIB_DIR)
