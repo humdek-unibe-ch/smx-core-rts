@@ -9,6 +9,11 @@ In short, the runtime system spawns box instances as threads and manages the com
 
 The release page offers pre-compiled debian packages which can be installed through command line.
 
+Note that time-triggered nets are executed with RT-Tasks.
+In order for this to work, the user executing the Streamix application requires the appropriate rights.
+These can be configured in `/etc/security/limits.conf`.
+E.g. add the line `localtest       -       rtprio          99` in order to allow the user `localtest` to run Streamix applications with RT priority.
+
 ## Building
 
 To build the RTS from scratch run the following commands:
@@ -18,7 +23,6 @@ make
 sudo make install
 ```
 
-Note that time-triggered nets are executed with RT-Tasks.
 
 ## Dependencies
 - [`smx-dep-zlog`](https://github.com/humdek-unibe-ch/smx-dep-zlog)
