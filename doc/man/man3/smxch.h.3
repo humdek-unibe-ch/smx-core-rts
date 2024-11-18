@@ -1,4 +1,4 @@
-.TH "include/smxch.h" 3 "Thu Mar 28 2024" "Version v1.0.0" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxch.h" 3 "Mon Nov 18 2024" "Version v1.0.1" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -12,6 +12,9 @@ include/smxch.h
 .SS "Macros"
 
 .in +1c
+.ti -1c
+.RI "#define \fBSMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK\fP(h,  box_name,  ch_name)"
+.br
 .ti -1c
 .RI "#define \fBSMX_CHANNEL_SET_BACKUP\fP(h,  box_name,  ch_name,  msg)   \fBsmx_channel_set_backup\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), msg )"
 .br
@@ -43,6 +46,9 @@ include/smxch.h
 .SS "Functions"
 
 .in +1c
+.ti -1c
+.RI "void \fBsmx_channel_activate_decoupled_read_block\fP (smx_channel_t *ch)"
+.br
 .ti -1c
 .RI "void \fBsmx_channel_change_collector_state\fP (smx_channel_t *ch, \fBsmx_channel_state_t\fP state)"
 .br
@@ -202,6 +208,25 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v\&
 Channel and FIFO definitions for the runtime system library of Streamix 
 .SH "Macro Definition Documentation"
 .PP 
+.SS "#define SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK(h, box_name, ch_name)"
+\fBValue:\fP
+.PP
+.nf
+    smx_channel_activate_decoupled_read_block(\
+            SMX_SIG_PORT( h, box_name, ch_name, in ) )
+.fi
+Activate the blocking read behaviour for the next read operation from a decoupled input port\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIh\fP The pointer to the net handler\&. 
+.br
+\fIbox_name\fP The name of the box\&. Note that this is not a string but the literal name of the box (without quotation marks)\&. 
+.br
+\fIch_name\fP The name of the input port\&. Note that this is not a string but the literal name of the port (without quotation marks)\&. 
+.RE
+.PP
+
 .SS "#define SMX_CHANNEL_READ(h, box_name, ch_name)   \fBsmx_channel_read\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
 Read from a streamix channel by accessing a net input port\&.
 .PP
@@ -378,14 +403,12 @@ The error code of the operation\&. Refer to \fBsmx_channel_err_e\fP for a descri
 
 .SH "Function Documentation"
 .PP 
-.SS "void smx_channel_change_collector_state (smx_channel_t * ch, \fBsmx_channel_state_t\fP state)"
-Change the state of a channel collector\&. The state is only changed if the current state is differnt than the new state and than the end state\&.
+.SS "void smx_channel_activate_decoupled_read_block (smx_channel_t * ch)"
+Allows to manually activate blocking for the next read operation of a decoupled input port\&.
 .PP
 \fBParameters\fP
 .RS 4
-\fIch\fP pointer to the channel 
-.br
-\fIstate\fP the new state
+\fIch\fP pointer to the channel
 .RE
 .PP
 \fBAuthor\fP
@@ -399,6 +422,17 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v\&
 .RE
 .PP
 Channel and FIFO definitions for the runtime system library of Streamix 
+.SS "void smx_channel_change_collector_state (smx_channel_t * ch, \fBsmx_channel_state_t\fP state)"
+Change the state of a channel collector\&. The state is only changed if the current state is differnt than the new state and than the end state\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIch\fP pointer to the channel 
+.br
+\fIstate\fP the new state 
+.RE
+.PP
+
 .SS "void smx_channel_change_read_state (smx_channel_t * ch, \fBsmx_channel_state_t\fP state)"
 Change the read state of a channel\&. The state is only changed if the current state is differnt than the new state and than the end state\&.
 .PP
