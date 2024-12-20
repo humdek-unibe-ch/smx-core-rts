@@ -102,6 +102,21 @@ smx_msg_t* smx_channel_await_and_read( void *h, smx_channel_t* ch )
 }
 
 /*****************************************************************************/
+void smx_channel_activate_decoupled_read_block( smx_channel_t* ch )
+{
+    if( ch->type == SMX_FIFO_D || ch->type == SMX_D_FIFO_D )
+    {
+        zlog_debug( ch->cat, "manually toggle read block" );
+        pthread_mutex_lock( &ch->ch_mutex );
+        if( ch->fifo->count == 0 )
+        {
+            smx_channel_change_read_state( ch, SMX_CHANNEL_PENDING );
+        }
+        pthread_mutex_unlock( &ch->ch_mutex );
+    }
+}
+
+/*****************************************************************************/
 void smx_channel_change_collector_state( smx_channel_t* ch,
         smx_channel_state_t state )
 {
@@ -245,8 +260,6 @@ void smx_channel_destroy_end( smx_channel_end_t* end )
     free( end );
 }
 
-#ifndef SMX_TESTING
-
 /*****************************************************************************/
 smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
 {
@@ -302,8 +315,6 @@ smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
     pthread_mutex_unlock( &ch->ch_mutex );
     return msg;
 }
-
-#endif /* SMX_TESTING */
 
 /*****************************************************************************/
 int smx_channel_ready_to_read( smx_channel_t* ch )
@@ -458,8 +469,6 @@ void smx_channel_terminate_source( smx_channel_t* ch )
     smx_channel_change_read_state( ch, SMX_CHANNEL_END );
     pthread_mutex_unlock( &ch->ch_mutex );
 }
-
-#ifndef SMX_TESTING
 
 /*****************************************************************************/
 int smx_channel_write( void* h, smx_channel_t* ch, smx_msg_t* msg )
@@ -635,8 +644,6 @@ int smx_channel_write( void* h, smx_channel_t* ch, smx_msg_t* msg )
     pthread_mutex_unlock( &ch->ch_mutex );
     return 0;
 }
-
-#endif /* SMX_TESTING */
 
 /*****************************************************************************/
 smx_collector_t* smx_collector_create()

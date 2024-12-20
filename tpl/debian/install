@@ -1,2 +1,3 @@
 usr/lib/*/libsmxrts-<maj_version>.so
 usr/lib/*/libsmxrts.so.<maj_version>
+schemas/* /etc/smx/libsmxrts<maj_version>/schemas

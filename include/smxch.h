@@ -15,6 +15,25 @@
 #define SMXCH_H
 
 /**
+ * @def SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK()
+ *
+ * Activate the blocking read behaviour for the next read operation from
+ * a decoupled input port.
+ *
+ * @param h
+ *  The pointer to the net handler.
+ * @param box_name
+ *  The name of the box. Note that this is not a string but the literal name of
+ *  the box (without quotation marks).
+ * @param ch_name
+ *  The name of the input port. Note that this is not a string but the literal
+ *  name of the port (without quotation marks).
+ */
+#define SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK( h, box_name, ch_name )\
+    smx_channel_activate_decoupled_read_block(\
+            SMX_SIG_PORT( h, box_name, ch_name, in ) )
+
+/**
  * @def SMX_CHANNEL_SET_BACKUP()
  *
  * Store a backup message to a channel. This can be used to ansure that ar
@@ -258,6 +277,14 @@ int smx_channel_await( void *h, smx_channel_t* ch );
  *              went wrong.
  */
 smx_msg_t* smx_channel_await_and_read( void *h, smx_channel_t* ch );
+
+/**
+ * Allows to manually activate blocking for the next read operation of
+ * a decoupled input port.
+ *
+ * @param ch    pointer to the channel
+ */
+void smx_channel_activate_decoupled_read_block( smx_channel_t* ch );
 
 /**
  * Change the state of a channel collector. The state is only changed if the
