@@ -92,6 +92,7 @@ enum smx_channel_err_e
     SMX_CHANNEL_ERR_UNINITIALISED = -93, /**< the channel was never initialised */
     SMX_CHANNEL_ERR_TIMEOUT = -92,       /**< the channel operation timed out */
     SMX_CHANNEL_ERR_CV = -91,            /**< the conditional variable lock failed */
+    SMX_CHANNEL_ERR_OPEN = -90,          /**< no channel is connectd */
 };
 
 /**

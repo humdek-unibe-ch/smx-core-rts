@@ -640,22 +640,26 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
         {
             smx_net_report_rate_warning( h );
         }
-        for( int i = 0; i < h->sig->in.count; i++)
+        // only block for normal nets
+        if( h->attr == NULL )
         {
-            rc = smx_channel_await( h, h->sig->in.ports[i] );
-            if( rc < 0 )
+            for( int i = 0; i < h->sig->in.count; i++)
             {
-                break;
+                rc = smx_channel_await( h, h->sig->in.ports[i] );
+                if( rc == SMX_CHANNEL_ERR_OPEN || rc == SMX_CHANNEL_ERR_TIMEOUT )
+                {
+                    rc = SMX_CHANNEL_ERR_NONE;
+                    continue;
+                }
+                if( rc < 0 )
+                {
+                    break;
+                }
             }
         }
         if( rc < 0 )
         {
             state = SMX_NET_END;
-            if( rc == SMX_CHANNEL_ERR_TIMEOUT )
-            {
-                state = SMX_NET_CONTINUE;
-            }
-            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_SKIP_IMPL );
         }
         else
         {

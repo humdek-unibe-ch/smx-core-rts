@@ -6,12 +6,13 @@
   box which must be externally triggered to start data capture (e.g. audio
   playback).
 - Add JSON schemas for `smx_rn` and `smx_tf`.
+- The macro `SMX_HAS_READ_TIMEOUT()` allows to check whether the read timeout
+  error is set.
 
 ### Changes
 - Instead blocking on each channel, a net is blocked at the beginning of a run
   until all channels are ready. Note that input decoupled channels are always
-  ready. Further, note that channel read timeouts trigger an automatic run
-  restart (logging a `SMX_PROFILER_ACTION_NET_SKIP_IMPL` profiler entry).
+  ready.
 - `smx_channel_read()` is no longer blocking, use
   `smx_channel_await_and_read()` instead.
 - `smx_channel_await()` blocks until a channel is ready.

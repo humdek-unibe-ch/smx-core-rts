@@ -29,7 +29,8 @@ int smx_channel_await( void *h, smx_channel_t* ch )
 
     if( ch == NULL )
     {
-        return -1;
+        // ignore open channels
+        return 0;
     }
 
     if( ch->source == NULL )
@@ -37,6 +38,8 @@ int smx_channel_await( void *h, smx_channel_t* ch )
         SMX_LOG_MAIN( main, fatal, "channel not initialised" );
         return -1;
     }
+
+    ch->source->err = SMX_CHANNEL_ERR_NONE;
 
     pthread_mutex_lock( &ch->ch_mutex);
     while( ch->source->state == SMX_CHANNEL_PENDING && rc == 0 )
@@ -272,6 +275,11 @@ smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
     if( ch->source == NULL )
     {
         SMX_LOG_MAIN( main, fatal, "channel not initialised" );
+        return NULL;
+    }
+
+    if( ch->source->err != SMX_CHANNEL_ERR_NONE )
+    {
         return NULL;
     }
 
@@ -817,8 +825,6 @@ smx_msg_t* smx_fifo_read( void* h, smx_channel_t* ch, smx_fifo_t* fifo )
     if( ch == NULL || fifo == NULL )
         return NULL;
 
-    ch->source->err = SMX_CHANNEL_ERR_NONE;
-
     if( fifo->count > 0 )
     {
         // messages are available
@@ -856,8 +862,6 @@ smx_msg_t* smx_fifo_d_read( void* h, smx_channel_t* ch, smx_fifo_t* fifo )
     smx_msg_t* old_backup = NULL;
     if( ch == NULL || fifo == NULL )
         return NULL;
-
-    ch->source->err = SMX_CHANNEL_ERR_NONE;
 
     if( fifo->count > 0 )
     {
@@ -908,8 +912,6 @@ smx_msg_t* smx_fifo_dd_read( void* h, smx_channel_t* ch, smx_fifo_t* fifo )
     int new_count;
     if( ch == NULL || fifo == NULL )
         return NULL;
-
-    ch->source->err = SMX_CHANNEL_ERR_NONE;
 
     if( fifo->count > 0 )
     {
