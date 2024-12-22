@@ -122,6 +122,27 @@
     smx_get_read_error( SMX_SIG_PORT( h, box_name, ch_name, in ) )
 
 /**
+ * @def SMX_HAS_READ_TIMEOUT()
+ *
+ * Check if the channel has a read timeout. Use this macro if
+ * SMX_CHANNEL_READ() failed.
+ *
+ * @param h
+ *  The pointer to the net handler.
+ * @param box_name
+ *  The name of the box. Note that this is not a string but the literal name of
+ *  the box (without quotation marks).
+ * @param ch_name
+ *  The name of the input port. Note that this is not a string but the literal
+ *  name of the port (without quotation marks).
+ * @return
+ *  True if a read timeout error is set, false otherwse.
+ */
+#define SMX_HAS_READ_TIMEOUT( h, box_name, ch_name )\
+    smx_get_read_error( SMX_SIG_PORT( h, box_name, ch_name, in ) ) \
+        == SMX_CHANNEL_ERR_TIMEOUT
+
+/**
  * @def SMX_GET_WRITE_ERROR()
  *
  * Get the error code of a channel write operation. Use this macro if
