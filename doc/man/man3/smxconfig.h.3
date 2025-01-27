@@ -1,0 +1,602 @@
+.TH "include/smxconfig.h" 3 "Mon Jan 27 2025" "Version v1.1.0" "libsmxrts" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/smxconfig.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <bson\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include 'smxtypes\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBsmx_config_data_maps_apply\fP (smx_config_data_maps_t *maps, bson_t *src_payload)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_maps_apply_base\fP (smx_config_data_map_t *key_map, bson_t *src_payload)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_maps_apply_ext\fP (smx_config_data_maps_t *maps, bson_t *src_payload)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_maps_apply_ext_iter\fP (bson_iter_t *i_tgt, bson_t *src_payload, bson_t *payload, const char *key, smx_config_data_maps_t *maps)"
+.br
+.ti -1c
+.RI "void \fBsmx_config_data_maps_cleanup\fP (smx_config_data_maps_t *maps)"
+.br
+.ti -1c
+.RI "bson_t * \fBsmx_config_data_maps_get_mapped_payload\fP (smx_config_data_maps_t *maps)"
+.br
+.ti -1c
+.RI "smx_config_data_map_t * \fBsmx_config_data_maps_get_map_by_key\fP (smx_config_data_maps_t *maps, const char *key)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_maps_init\fP (bson_iter_t *i_fields, bson_t *data, smx_config_data_maps_t *maps)"
+.br
+.ti -1c
+.RI "void \fBsmx_config_data_maps_init_net_handler\fP (smx_config_data_maps_t *maps, void *h)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_map_append_val\fP (const char *dot_key, const char *iter_key, bson_t *src_payload, bson_t *payload, smx_config_data_maps_t *maps)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_data_map_can_write_bool\fP (bson_iter_t *i_src)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_data_map_can_write_double\fP (bson_iter_t *i_src)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_data_map_can_write_int32\fP (bson_iter_t *i_src)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_data_map_can_write_int64\fP (bson_iter_t *i_src)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_data_map_get_iter\fP (bson_t *data, const char *map, bson_iter_t *child)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_map_init\fP (bson_t *payload, bson_iter_t *i_map, bool *is_extended, smx_config_data_map_t *map)"
+.br
+.ti -1c
+.RI "void \fBsmx_config_data_map_init_src_prefix\fP (smx_config_data_map_t *map, const char *prefix)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_map_init_tgt_doc\fP (bson_t *payload, smx_config_data_map_t *map, bson_iter_t *i_tgt, bool *is_extended)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_data_map_init_tgt_utf8\fP (bson_t *payload, smx_config_data_map_t *map, const char *tgt_path, bool *is_extended)"
+.br
+.ti -1c
+.RI "const char * \fBsmx_config_data_map_strerror\fP (int code)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_get_bool\fP (bson_t *conf, const char *search)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_get_bool_err\fP (bson_t *conf, const char *search, \fBsmx_config_error_t\fP *err)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_get_int\fP (bson_t *conf, const char *search)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_get_int_err\fP (bson_t *conf, const char *search, \fBsmx_config_error_t\fP *err)"
+.br
+.ti -1c
+.RI "double \fBsmx_config_get_double\fP (bson_t *conf, const char *search)"
+.br
+.ti -1c
+.RI "double \fBsmx_config_get_double_err\fP (bson_t *conf, const char *search, \fBsmx_config_error_t\fP *err)"
+.br
+.ti -1c
+.RI "const char * \fBsmx_config_get_string\fP (bson_t *conf, const char *search, unsigned int *len)"
+.br
+.ti -1c
+.RI "const char * \fBsmx_config_get_string_err\fP (bson_t *conf, const char *search, unsigned int *len, \fBsmx_config_error_t\fP *err)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_init_bool\fP (bson_t *conf, const char *search, bool *val)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_init_double\fP (bson_t *conf, const char *search, double *val)"
+.br
+.ti -1c
+.RI "int \fBsmx_config_init_int\fP (bson_t *conf, const char *search, int *val)"
+.br
+.ti -1c
+.RI "const char * \fBsmx_config_strerror\fP (\fBsmx_config_error_t\fP err)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+\fBAuthor\fP
+.RS 4
+Simon Maurer 
+.RE
+.PP
+\fBLicense:\\n\fP
+.RS 4
+This Source Code Form is subject to the terms of the Mozilla Public License, v\&. 2\&.0\&. If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/\&.
+.RE
+.PP
+Helper functions for parsing configuration files of the runtime systemr library of Streamix\&. 
+.SH "Function Documentation"
+.PP 
+.SS "int smx_config_data_map_append_val (const char * dot_key, const char * iter_key, bson_t * src_payload, bson_t * payload, smx_config_data_maps_t * maps)"
+Append a mapped value if defined in the mapping list\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdot_key\fP The dot-seperated key to the target value\&. 
+.br
+\fIiter_key\fP The key of the current target iterator\&. 
+.br
+\fIsrc_payload\fP A pointer to the source payload\&. 
+.br
+\fIpayload\fP A pointer to the new payload\&. 
+.br
+\fImaps\fP A pointer to the mapping list\&. return 0 on success or -1 on failure\&. 
+.RE
+.PP
+
+.SS "bool smx_config_data_map_can_write_bool (bson_iter_t * i_src)"
+Check whether the value at the source payload can be mapped to a boolean value at the target payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIi_src\fP The source payload iterator pointing to the field to be checked\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the value can be mapped, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool smx_config_data_map_can_write_double (bson_iter_t * i_src)"
+Check whether the value at the source payload can be mapped to a double value at the target payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIi_src\fP The source payload iterator pointing to the field to be checked\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the value can be mapped, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool smx_config_data_map_can_write_int32 (bson_iter_t * i_src)"
+Check whether the value at the source payload can be mapped to a int32 value at the target payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIi_src\fP The source payload iterator pointing to the field to be checked\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the value can be mapped, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool smx_config_data_map_can_write_int64 (bson_iter_t * i_src)"
+Check whether the value at the source payload can be mapped to a int64 value at the target payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIi_src\fP The source payload iterator pointing to the field to be checked\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the value can be mapped, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool smx_config_data_map_get_iter (bson_t * data, const char * map, bson_iter_t * child)"
+Get the value location in the output document\&. A key map value can either be of type bool, int64, int32, or double\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIdata\fP The output document 
+.br
+\fImap\fP The target path to the output value (dot-notation)\&. 
+.br
+\fIchild\fP An output parameter to store the iterator 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if key exists fals otherwise 
+.RE
+.PP
+
+.SS "int smx_config_data_map_init (bson_t * payload, bson_iter_t * i_map, bool * is_extended, smx_config_data_map_t * map)"
+Initialise an input output key mapping\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpayload\fP A pointer to the output document\&. 
+.br
+\fIi_map\fP The document iterator for the subdocument in the configuration file pointing to a mapping\&. 
+.br
+\fIis_extended\fP An output parameter where the is_extended flag will be stored\&. This flag is set to true if one of the mapping uses extended functionality (e\&.g\&. mapping strings or explicit types)\&. 
+.br
+\fImap\fP A pointer to an initialized mapping structure\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, an error code on failure use smx_config_map_strerror()\&. 
+.RE
+.PP
+
+.SS "void smx_config_data_map_init_src_prefix (smx_config_data_map_t * map, const char * prefix)"
+Set a source path prefix\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImap\fP A pointer to the map item where the source prefix will be used\&. 
+.br
+\fIprefix\fP The prefix to be set\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_map_init_tgt_doc (bson_t * payload, smx_config_data_map_t * map, bson_iter_t * i_tgt, bool * is_extended)"
+Initialise the key map target item if it is of type DOCUMENT\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpayload\fP A pointer to the mapped payload document\&. 
+.br
+\fImap\fP A pointer to the current map item\&. 
+.br
+\fIi_tgt\fP The document iterator for the subdocument in the configuration file pointing to a mapping target\&. 
+.br
+\fIis_extended\fP An output parameter where the is_extended flag will be stored\&. This flag is set to true if one of the mapping uses extended functionality (e\&.g\&. mapping strings or explicit types)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_map_init_tgt_utf8 (bson_t * payload, smx_config_data_map_t * map, const char * tgt_path, bool * is_extended)"
+Initialise the key map target item if it is of type UTF8\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIpayload\fP A pointer to the mapped payload document\&. 
+.br
+\fImap\fP A pointer to the current map item\&. 
+.br
+\fIi_map\fP The document iterator for the subdocument in the configuration file pointing to a mapping target\&. 
+.br
+\fIis_extended\fP An output parameter where the is_extended flag will be stored\&. This flag is set to true if one of the mapping uses extended functionality (e\&.g\&. mapping strings or explicit types)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, -1 on failure\&. 
+.RE
+.PP
+
+.SS "const char* smx_config_data_map_strerror (int code)"
+Return a humanreadable error string, given a an error code\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcode\fP The error code to translate\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The error string\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_maps_apply (smx_config_data_maps_t * maps, bson_t * src_payload)"
+Perform a value mapping defined in a key map\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the initialised key map list\&. 
+.br
+\fIsrc_payload\fP A pointer to the source payload\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, an error code on failure use smx_config_map_strerror()\&.
+.RE
+.PP
+\fBAuthor\fP
+.RS 4
+Simon Maurer 
+.RE
+.PP
+\fBLicense:\\n\fP
+.RS 4
+This Source Code Form is subject to the terms of the Mozilla Public License, v\&. 2\&.0\&. If a copy of the MPL was not distributed with this file, You can obtain one at https://mozilla.org/MPL/2.0/\&.
+.RE
+.PP
+Helper functions for parsing configuration files of the runtime systemr library of Streamix\&. 
+.SS "int smx_config_data_maps_apply_base (smx_config_data_map_t * key_map, bson_t * src_payload)"
+Perform a basic value mapping\&. This only works for booelans, integers and floating point values\&. To handle ather type mappings the extended mapping version must be used\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey_map\fP A pointer to a key map item\&. 
+.br
+\fIsrc_payload\fP A pointer to the source payload\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, an error code on failure use smx_config_map_strerror()\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_maps_apply_ext (smx_config_data_maps_t * maps, bson_t * src_payload)"
+Perform an extended value mapping\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the mapping list\&. 
+.br
+\fIsrc_payload\fP A pointer to the source payload\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, an error code on failure use smx_config_map_strerror()\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_maps_apply_ext_iter (bson_iter_t * i_tgt, bson_t * src_payload, bson_t * payload, const char * key, smx_config_data_maps_t * maps)"
+Recuresvly itereate through the target payload to reconstruct it with the mapped values from the source payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIsrc_payload\fP A pointer to the source payload\&. 
+.br
+\fIpayload\fP A pointer to the new payload\&. 
+.br
+\fIkey\fP A dot-separated key pointing to the current iteration parent\&. 
+.br
+\fImaps\fP A pointer to the mapping list\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0 on success, an error code on failure use smx_config_map_strerror()\&. 
+.RE
+.PP
+
+.SS "void smx_config_data_maps_cleanup (smx_config_data_maps_t * maps)"
+Free all maps allocated in a map array
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the maps structure 
+.RE
+.PP
+
+.SS "smx_config_data_map_t* smx_config_data_maps_get_map_by_key (smx_config_data_maps_t * maps, const char * key)"
+Get a map structure given a map key\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the mapping list\&. 
+.br
+\fIkey\fP The map key to serach for\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the map or NULL on failure\&. 
+.RE
+.PP
+
+.SS "bson_t* smx_config_data_maps_get_mapped_payload (smx_config_data_maps_t * maps)"
+Returns a pointer to the mapped payload\&. Make sure to run \fBsmx_config_data_maps_apply()\fP to update the payload\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the mapping list\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the mapped payload\&. 
+.RE
+.PP
+
+.SS "int smx_config_data_maps_init (bson_iter_t * i_fields, bson_t * data, smx_config_data_maps_t * maps)"
+Initialise an input-output key map array\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIi_fields\fP The document iterator of the map list definition\&. 
+.br
+\fIdata\fP A pointer to the target document structure\&. 
+.br
+\fImaps\fP A pointer to an initialized maps structure\&. 
+.RE
+.PP
+
+.SS "void smx_config_data_maps_init_net_handler (smx_config_data_maps_t * maps, void * h)"
+Set a net handler to enable logging\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fImaps\fP A pointer to the map list\&. 
+.br
+\fIh\fP A pointer to the net handler\&. 
+.RE
+.PP
+
+.SS "bool smx_config_get_bool (bson_t * conf, const char * search)"
+This is the same as \fBsmx_config_get_bool_err()\fP however without the err output parameter\&. 
+.SS "bool smx_config_get_bool_err (bson_t * conf, const char * search, \fBsmx_config_error_t\fP * err)"
+Get a boolean value from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIerr\fP A pointer to a config error flag\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The boolean value read from the file or false if value is not available\&. 
+.RE
+.PP
+
+.SS "double smx_config_get_double (bson_t * conf, const char * search)"
+This is the same as \fBsmx_config_get_double_err()\fP however without the err output parameter\&. 
+.SS "double smx_config_get_double_err (bson_t * conf, const char * search, \fBsmx_config_error_t\fP * err)"
+Get a double value from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIerr\fP A pointer to a config error flag\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The double value read from the file or 0 if value is not available\&. 
+.RE
+.PP
+
+.SS "int smx_config_get_int (bson_t * conf, const char * search)"
+This is the same as \fBsmx_config_get_int_err()\fP however without the err output parameter\&. 
+.SS "int smx_config_get_int_err (bson_t * conf, const char * search, \fBsmx_config_error_t\fP * err)"
+Get an int value from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIerr\fP A pointer to a config error flag\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The int value read from the file or 0 if value is not available\&. 
+.RE
+.PP
+
+.SS "const char* smx_config_get_string (bson_t * conf, const char * search, unsigned int * len)"
+This is the same as \fBsmx_config_get_string_err()\fP however without the err output parameter\&. 
+.SS "const char* smx_config_get_string_err (bson_t * conf, const char * search, unsigned int * len, \fBsmx_config_error_t\fP * err)"
+Get a string value from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIlen\fP An optional autput buffer to store the string length\&. 
+.br
+\fIerr\fP A pointer to a config error flag\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The string value read from the file or NULL if value is not available\&. 
+.RE
+.PP
+
+.SS "int smx_config_init_bool (bson_t * conf, const char * search, bool * val)"
+Get a boolean from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIval\fP An output buffer to store the boolean value\&. This is only valid of the function returns successfully\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A negative error code or 0 on success\&. 
+.RE
+.PP
+
+.SS "int smx_config_init_double (bson_t * conf, const char * search, double * val)"
+Get a double from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIval\fP An output buffer to store the double value\&. This is only valid of the function returns successfully\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A negative error code or 0 on success\&. 
+.RE
+.PP
+
+.SS "int smx_config_init_int (bson_t * conf, const char * search, int * val)"
+Get an int from the config file\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIconf\fP The pointer to th econfig file\&. 
+.br
+\fIsearch\fP A dot-notation key like 'a\&.b\&.c\&.d'\&. 
+.br
+\fIval\fP An output buffer to store the int value\&. This is only valid of the function returns successfully\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A negative error code or 0 on success\&. 
+.RE
+.PP
+
+.SS "const char* smx_config_strerror (\fBsmx_config_error_t\fP err)"
+Return a human-readable error message, give an error code\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIerr\fP The error code to transform\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A human-readable error message\&. 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for libsmxrts from the source code\&.
