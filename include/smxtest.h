@@ -36,6 +36,14 @@
     SMX_CHANNEL_ERR_NO_TARGET
 
 /**
+ * @def SMX_HAS_READ_TIMEOUT()
+ *
+ * This macro performs a NOP
+ */
+#define SMX_HAS_READ_TIMEOUT( h, box_name, ch_name )\
+    false
+
+/**
  * @def SMX_SET_READ_TIMEOUT()
  *
  * This macro performs a NOP
