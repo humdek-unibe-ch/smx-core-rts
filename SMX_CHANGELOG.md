@@ -1,4 +1,10 @@
-# `v1.1.0` (latest)
+# `v1.1.1` (latest)
+
+### Changes
+- Use LTTng UST Streamix wrapper library to avoid dependency problems.
+
+-------------------
+# `v1.1.0`
 
 ### New Features
 - Allow to activate a blocking read operation from a decoupled input port with
