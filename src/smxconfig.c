@@ -415,18 +415,38 @@ int smx_config_data_map_append_val( const char* dot_key,
                 }
                 else if( maps->items[i].type == BSON_TYPE_INT32 )
                 {
-                    if( smx_config_data_map_can_write_int32( src_child ) )
+                    if( BSON_ITER_HOLDS_INT32( src_child ) )
                     {
                         BSON_APPEND_INT32( payload, iter_key,
                                 bson_iter_int32( src_child ) );
                     }
+                    else if( BSON_ITER_HOLDS_INT64( src_child ) )
+                    {
+                        BSON_APPEND_INT64( payload, iter_key,
+                                bson_iter_int64( src_child ) );
+                    }
+                    else if( BSON_ITER_HOLDS_DOUBLE( src_child ) )
+                    {
+                        BSON_APPEND_DOUBLE( payload, iter_key,
+                                bson_iter_double( src_child ) );
+                    }
                 }
                 else if( maps->items[i].type == BSON_TYPE_INT64 )
                 {
-                    if( smx_config_data_map_can_write_int64( src_child ) )
+                    if( BSON_ITER_HOLDS_INT32( src_child ) )
+                    {
+                        BSON_APPEND_INT32( payload, iter_key,
+                                bson_iter_as_int64( src_child ) );
+                    }
+                    else if( BSON_ITER_HOLDS_INT64( src_child ) )
                     {
                         BSON_APPEND_INT64( payload, iter_key,
-                                bson_iter_as_int64( src_child ) );
+                                bson_iter_int64( src_child ) );
+                    }
+                    else if( BSON_ITER_HOLDS_DOUBLE( src_child ) )
+                    {
+                        BSON_APPEND_DOUBLE( payload, iter_key,
+                                bson_iter_double( src_child ) );
                     }
                 }
                 else if( maps->items[i].type == BSON_TYPE_DOUBLE )
