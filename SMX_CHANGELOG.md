@@ -1,4 +1,12 @@
-# `v1.1.1` (latest)
+# `v1.1.2` (latest)
+
+### Improvements
+- When using maps in extended mode, integers are now automatically upgraded to
+  doubles if the source value is a double.  Unfortunately, this does not work
+  in non-extended mode as I cannot overwrite an integer field with a double.
+
+-------------------
+# `v1.1.1`
 
 ### Changes
 - Use LTTng UST Streamix wrapper library to avoid dependency problems.
