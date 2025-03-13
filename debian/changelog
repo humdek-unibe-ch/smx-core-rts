@@ -1,3 +1,9 @@
+libsmxrts1.1 (1.1.2-1) focal; urgency=medium
+
+  * upgrade integers to doubles for extended maps
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Thu, 13 Mar 2025 14:17:58 +0100
+
 libsmxrts1.1 (1.1.1-1) focal; urgency=medium
 
   * use Streamix warpper for LTTng UST
