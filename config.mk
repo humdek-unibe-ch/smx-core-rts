@@ -12,7 +12,7 @@ VREV = 2
 VDEB = 1
 
 # the RTS library
-SMX_LIBS = smxzlog-1.0 smxlttngust-0.1
+SMX_LIBS = smxzlog-1.0 smxlttngust-0.1 smxurcu-0.1
 
 # the name of the library
 LIBNAME = smxrts

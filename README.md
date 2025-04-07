@@ -46,7 +46,6 @@ sudo make install
     ```
     sudo apt-get install lttng-tools
     sudo apt-get install lttng-modules-dkms
-    sudo apt-get install liblttng-ust-dev
     ```
 
 ## Streamix Applications
