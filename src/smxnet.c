@@ -479,7 +479,8 @@ int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h )
 }
 
 /*****************************************************************************/
-int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout )
+int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
+        int* idx )
 {
     int cnt = 0;
     int rc;
@@ -501,6 +502,7 @@ int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout )
         }
     }
 
+    *idx = net->sig->source.count;
     net->sig->source.ports[net->sig->source.count] = ch;
     net->sig->source.count++;
 

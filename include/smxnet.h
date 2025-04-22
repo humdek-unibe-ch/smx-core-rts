@@ -379,11 +379,14 @@ int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h )
  * @param len
  *  The length of the queue to initialise.
  * @param timeout
- *  On optional read timeout.
+ *  An optional read timeout.
+ * @param idx
+ *  The index of the source new channel.
  * @return
  *  0 on success, -1 on failure.
  */
-int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout );
+int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
+        int* idx );
 
 /**
  * Read from the source queue of the net.
