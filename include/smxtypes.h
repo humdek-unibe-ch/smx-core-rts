@@ -42,6 +42,11 @@
 #define SMX_MAX_CHS 10000
 
 /**
+ * The number of maximal allowed source channels in one streamix net.
+ */
+#define SMX_MAX_SOURCE_CHS 10
+
+/**
  * The streamix channel error type. Refer to the error enumeration definition
  * for more details #smx_channel_err_e.
  */
@@ -407,6 +412,11 @@ struct smx_net_sig_s
         int len;                    /**< the number of output ports */
         smx_channel_t** ports;      /**< an array of channel pointers */
     } out;                          /**< output channels */
+    struct {
+        int count;                  /**< the number of connected source ports */
+        /** an array of channel pointers */
+        smx_channel_t* ports[SMX_MAX_SOURCE_CHS];
+    } source;                       /**< internal input channel for sources */
 };
 
 /**
