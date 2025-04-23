@@ -1,4 +1,4 @@
-# `v1.2.0` (pending)
+# `v1.2.0` (latest)
 
 ### New Features
 - Allow to add source queues with `smx_net_source_add()`.
@@ -6,8 +6,11 @@
 - Allow to write to source queues with `smx_net_source_write()`.
 - Allow to register source callback functions with `smx_net_source_register_callback()`
 
+### Bug Fixes
+- Fix `lttng-ust` dependencies.
+
 -------------------
-# `v1.1.2` (latest)
+# `v1.1.2`
 
 ### Improvements
 - When using maps in extended mode, integers are now automatically upgraded to
