@@ -109,6 +109,7 @@ smx_net_t* smx_net_create( unsigned int id, const char* name,
     net->sig->out.ports = NULL;
     net->sig->out.count = 0;
     net->sig->out.len = 0;
+    net->sig->source.count = 0;
 
     net->rts = rts;
     net->state = NULL;
@@ -146,12 +147,18 @@ smx_net_t* smx_net_create( unsigned int id, const char* name,
 /*****************************************************************************/
 void smx_net_destroy( smx_net_t* h )
 {
+    int i;
+
     if( h != NULL )
     {
         if( h->name != NULL )
+        {
             free( h->name );
+        }
         if( h->impl != NULL )
+        {
             free( h->impl );
+        }
         if( h->static_conf != NULL )
         {
             bson_destroy( h->static_conf );
@@ -162,10 +169,18 @@ void smx_net_destroy( smx_net_t* h )
         }
         if( h->sig != NULL )
         {
+            for( i = 0; i < h->sig->source.count; i++ )
+            {
+                smx_channel_destroy( h->sig->source.items[i].port );
+            }
             if( h->sig->in.ports != NULL )
+            {
                 free( h->sig->in.ports );
+            }
             if( h->sig->out.ports != NULL )
+            {
                 free( h->sig->out.ports );
+            }
             free( h->sig );
         }
         free( h );
@@ -464,6 +479,113 @@ int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h )
 }
 
 /*****************************************************************************/
+int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
+        int* idx )
+{
+    int cnt = 0;
+    int rc;
+    smx_channel_t* ch = smx_channel_create( &cnt, len, SMX_D_FIFO, 999,
+            "source", "ch_source");
+
+    if( ch == NULL )
+    {
+        goto error;
+    }
+    ch->sink->net = net;
+    ch->source->net = net;
+
+    if( timeout != NULL )
+    {
+        rc = smx_set_read_timeout( ch, timeout->tv_sec,
+                timeout->tv_nsec );
+        if( rc < 0 )
+        {
+            goto error;
+        }
+    }
+
+    if( idx != NULL )
+    {
+        *idx = net->sig->source.count;
+    }
+    net->sig->source.items[net->sig->source.count].port = ch;
+    net->sig->source.items[net->sig->source.count].callback = NULL;
+    net->sig->source.count++;
+
+    return 0;
+
+error:
+    SMX_LOG( net, error, "failed to add internal source channel at index %d",
+            net->sig->source.count );
+    return -1;
+
+}
+
+/*****************************************************************************/
+smx_msg_t* smx_net_source_read( smx_net_t* net, int idx )
+{
+    smx_msg_t* msg = NULL;
+    if( idx < 0 || idx >= net->sig->source.count )
+    {
+        goto error;
+    }
+
+    msg = smx_channel_read_rts( net, net->sig->source.items[idx].port );
+    if( msg == NULL )
+    {
+        goto error;
+    }
+
+    return msg;
+
+error:
+    SMX_LOG( net, warn, "failed to read data from source port at index %d: %d",
+            idx, smx_get_read_error( net->sig->source.items[idx].port ) );
+    return NULL;
+}
+
+/*****************************************************************************/
+int smx_net_source_register_callback( smx_net_t* net, int idx,
+        smx_source_callback_t callback )
+{
+    if( idx < 0 || idx >= net->sig->source.count )
+    {
+        goto error;
+    }
+    net->sig->source.items[idx].callback = callback;
+    return 0;
+
+error:
+    SMX_LOG( net, warn,
+            "failed to register callback to source port at index %d",
+            idx );
+    return -1;
+}
+
+/*****************************************************************************/
+int smx_net_source_write( smx_net_t* net, int idx, smx_msg_t* msg )
+{
+    int rc;
+    if( idx < 0 || idx >= net->sig->source.count )
+    {
+        goto error;
+    }
+
+    rc = smx_channel_write_rts( net, net->sig->source.items[idx].port, msg );
+    if( rc < 0 )
+    {
+        goto error;
+    }
+
+    return 0;
+
+error:
+    SMX_LOG( net, warn, "failed to write data to source port at index %d: %d",
+            idx, smx_get_write_error( net->sig->source.items[idx].port ) );
+    return -1;
+}
+
+/*****************************************************************************/
 void* smx_net_start_routine( smx_net_t* h, int impl( void*, void* ),
         int init( void*, void** ), void cleanup( void*, void* ) )
 {
@@ -643,30 +765,35 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
         // only block for normal nets
         if( h->attr == NULL )
         {
+            for( int i = 0; i < h->sig->source.count; i++)
+            {
+                if( h->sig->source.items[i].callback != NULL )
+                {
+                    h->sig->source.items[i].callback( h );
+                }
+            }
+            for( int i = 0; i < h->sig->source.count; i++)
+            {
+                rc = smx_channel_await( h, h->sig->source.items[i].port );
+                if( rc != SMX_CHANNEL_ERR_OPEN && rc != SMX_CHANNEL_ERR_TIMEOUT
+                        && rc < 0 )
+                {
+                    goto smx_terminate_net;
+                }
+            }
             for( int i = 0; i < h->sig->in.count; i++)
             {
                 rc = smx_channel_await( h, h->sig->in.ports[i] );
-                if( rc == SMX_CHANNEL_ERR_OPEN || rc == SMX_CHANNEL_ERR_TIMEOUT )
+                if( rc != SMX_CHANNEL_ERR_OPEN && rc != SMX_CHANNEL_ERR_TIMEOUT
+                        && rc < 0 )
                 {
-                    rc = SMX_CHANNEL_ERR_NONE;
-                    continue;
-                }
-                if( rc < 0 )
-                {
-                    break;
+                    goto smx_terminate_net;
                 }
             }
         }
-        if( rc < 0 )
-        {
-            state = SMX_NET_END;
-        }
-        else
-        {
-            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_START_IMPL );
-            state = impl( h, h->state );
-            smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END_IMPL );
-        }
+        smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_START_IMPL );
+        state = impl( h, h->state );
+        smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END_IMPL );
         state = smx_net_update_state( h, state );
         smx_profiler_log_net( h, SMX_PROFILER_ACTION_NET_END );
     }
@@ -677,9 +804,9 @@ smx_terminate_net:
     SMX_LOG_NET( h, notice, "cleanup net" );
     cleanup( h, h->state );
     elapsed_wall = ( h->end_wall.tv_sec - h->start_wall.tv_sec );
-    elapsed_wall += ( h->end_wall.tv_nsec - h->start_wall.tv_nsec) / 1000000000.0;
+    elapsed_wall += ( h->end_wall.tv_nsec - h->start_wall.tv_nsec ) / 1000000000.0;
     SMX_LOG_NET( h, notice, "terminate net (loop count: %ld, loop rate: %d, wall time: %f)",
-            h->count, (int)(h->count/elapsed_wall), elapsed_wall );
+            h->count, ( int )( h->count / elapsed_wall ), elapsed_wall );
     return NULL;
 }
 

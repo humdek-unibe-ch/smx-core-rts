@@ -42,6 +42,11 @@
 #define SMX_MAX_CHS 10000
 
 /**
+ * The number of maximal allowed source channels in one streamix net.
+ */
+#define SMX_MAX_SOURCE_CHS 10
+
+/**
  * The streamix channel error type. Refer to the error enumeration definition
  * for more details #smx_channel_err_e.
  */
@@ -76,7 +81,8 @@ typedef struct smx_net_sig_s smx_net_sig_t;           /**< ::smx_net_sig_s */
 typedef struct smx_config_data_map_s smx_config_data_map_t;
 /** ::smx_msg_tsmem_data_maps_s */
 typedef struct smx_config_data_maps_s smx_config_data_maps_t;
-
+/** The source callback function signature */
+typedef void (*smx_source_callback_t)( smx_net_t* net );
 /**
  * The error state of a channel end
  */
@@ -393,6 +399,22 @@ struct smx_net_s
 };
 
 /**
+ * The source channel structure
+ */
+struct smx_net_source_s
+{
+    /**
+     * The callback function which is executed before each main loop run of a
+     * net.
+     */
+    smx_source_callback_t callback;
+    /** The source channel. */
+    smx_channel_t* port;
+};
+
+typedef struct smx_net_source_s smx_net_source_t;
+
+/**
  * The signature of a net
  */
 struct smx_net_sig_s
@@ -407,6 +429,11 @@ struct smx_net_sig_s
         int len;                    /**< the number of output ports */
         smx_channel_t** ports;      /**< an array of channel pointers */
     } out;                          /**< output channels */
+    struct {
+        int count;                  /**< the number of connected source ports */
+        /** an array of source channel structures */
+        smx_net_source_t items[SMX_MAX_SOURCE_CHS];
+    } source;                       /**< internal input channel for sources */
 };
 
 /**

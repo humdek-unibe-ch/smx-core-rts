@@ -372,6 +372,64 @@ void smx_net_report_rate_warning( smx_net_t* h );
 int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h );
 
 /**
+ * Add a source queue to the net.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param len
+ *  The length of the queue to initialise.
+ * @param timeout
+ *  An optional read timeout.
+ * @param idx
+ *  The index of the source new channel.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
+        int* idx );
+
+/**
+ * Read from the source queue of the net.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @return
+ *  A pointer to a message structure ::smx_msg_s or NULL if something went
+ *  wrong.
+ */
+smx_msg_t* smx_net_source_read( smx_net_t* net, int idx );
+
+/**
+ * Register a callback function to handle blocking calls to external libraries.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @param callback
+ *  The callback function to register. The callback function has no return
+ *  value and takes the net pointer as argument.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_register_callback( smx_net_t* net, int idx,
+        smx_source_callback_t callback );
+
+/**
+ * Write to the source queue of the net.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_write( smx_net_t* net, int idx, smx_msg_t* msg );
+
+/**
  * @brief the start routine of a thread associated to a box
  *
  * @param h                 pointer to the net handler

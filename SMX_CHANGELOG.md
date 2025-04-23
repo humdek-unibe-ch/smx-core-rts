@@ -1,3 +1,12 @@
+# `v1.2.0` (pending)
+
+### New Features
+- Allow to add source queues with `smx_net_source_add()`.
+- Allow to read from source queues with `smx_net_source_read()`.
+- Allow to write to source queues with `smx_net_source_write()`.
+- Allow to register source callback functions with `smx_net_source_register_callback()`
+
+-------------------
 # `v1.1.2` (latest)
 
 ### Improvements
