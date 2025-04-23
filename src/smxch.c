@@ -266,6 +266,12 @@ void smx_channel_destroy_end( smx_channel_end_t* end )
 /*****************************************************************************/
 smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
 {
+    return smx_channel_read_rts( h, ch );
+}
+
+/*****************************************************************************/
+smx_msg_t* smx_channel_read_rts( void* h, smx_channel_t* ch )
+{
     smx_msg_t* msg = NULL;
     if( ch == NULL )
     {
@@ -280,6 +286,12 @@ smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch )
 
     if( ch->source->err != SMX_CHANNEL_ERR_NONE )
     {
+        return NULL;
+    }
+
+    if( ch->source->state != SMX_CHANNEL_READY )
+    {
+        // await timed out
         return NULL;
     }
 
@@ -480,6 +492,12 @@ void smx_channel_terminate_source( smx_channel_t* ch )
 
 /*****************************************************************************/
 int smx_channel_write( void* h, smx_channel_t* ch, smx_msg_t* msg )
+{
+    return smx_channel_write_rts( h, ch, msg );
+}
+
+/*****************************************************************************/
+int smx_channel_write_rts( void* h, smx_channel_t* ch, smx_msg_t* msg )
 {
     int rc = 0;
     int nsec_sum;

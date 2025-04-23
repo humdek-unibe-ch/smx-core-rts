@@ -171,7 +171,7 @@ void smx_net_destroy( smx_net_t* h )
         {
             for( i = 0; i < h->sig->source.count; i++ )
             {
-                smx_channel_destroy( h->sig->source.ports[i] );
+                smx_channel_destroy( h->sig->source.items[i].port );
             }
             if( h->sig->in.ports != NULL )
             {
@@ -489,8 +489,10 @@ int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
 
     if( ch == NULL )
     {
-        return -1;
+        goto error;
     }
+    ch->sink->net = net;
+    ch->source->net = net;
 
     if( timeout != NULL )
     {
@@ -498,37 +500,89 @@ int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
                 timeout->tv_nsec );
         if( rc < 0 )
         {
-            return -1;
+            goto error;
         }
     }
 
-    *idx = net->sig->source.count;
-    net->sig->source.ports[net->sig->source.count] = ch;
+    if( idx != NULL )
+    {
+        *idx = net->sig->source.count;
+    }
+    net->sig->source.items[net->sig->source.count].port = ch;
+    net->sig->source.items[net->sig->source.count].callback = NULL;
     net->sig->source.count++;
 
     return 0;
+
+error:
+    SMX_LOG( net, error, "failed to add internal source channel at index %d",
+            net->sig->source.count );
+    return -1;
+
 }
 
 /*****************************************************************************/
 smx_msg_t* smx_net_source_read( smx_net_t* net, int idx )
 {
+    smx_msg_t* msg = NULL;
     if( idx < 0 || idx >= net->sig->source.count )
     {
-        return NULL;
+        goto error;
     }
 
-    return smx_channel_read( net, net->sig->source.ports[idx] );
+    msg = smx_channel_read_rts( net, net->sig->source.items[idx].port );
+    if( msg == NULL )
+    {
+        goto error;
+    }
+
+    return msg;
+
+error:
+    SMX_LOG( net, warn, "failed to read data from source port at index %d: %d",
+            idx, smx_get_read_error( net->sig->source.items[idx].port ) );
+    return NULL;
+}
+
+/*****************************************************************************/
+int smx_net_source_register_callback( smx_net_t* net, int idx,
+        smx_source_callback_t callback )
+{
+    if( idx < 0 || idx >= net->sig->source.count )
+    {
+        goto error;
+    }
+    net->sig->source.items[idx].callback = callback;
+    return 0;
+
+error:
+    SMX_LOG( net, warn,
+            "failed to register callback to source port at index %d",
+            idx );
+    return -1;
 }
 
 /*****************************************************************************/
 int smx_net_source_write( smx_net_t* net, int idx, smx_msg_t* msg )
 {
+    int rc;
     if( idx < 0 || idx >= net->sig->source.count )
     {
-        return -1;
+        goto error;
     }
 
-    return smx_channel_write( net, net->sig->source.ports[idx], msg );
+    rc = smx_channel_write_rts( net, net->sig->source.items[idx].port, msg );
+    if( rc < 0 )
+    {
+        goto error;
+    }
+
+    return 0;
+
+error:
+    SMX_LOG( net, warn, "failed to write data to source port at index %d: %d",
+            idx, smx_get_write_error( net->sig->source.items[idx].port ) );
+    return -1;
 }
 
 /*****************************************************************************/
@@ -713,7 +767,14 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
         {
             for( int i = 0; i < h->sig->source.count; i++)
             {
-                rc = smx_channel_await( h, h->sig->source.ports[i] );
+                if( h->sig->source.items[i].callback != NULL )
+                {
+                    h->sig->source.items[i].callback( h );
+                }
+            }
+            for( int i = 0; i < h->sig->source.count; i++)
+            {
+                rc = smx_channel_await( h, h->sig->source.items[i].port );
                 if( rc != SMX_CHANNEL_ERR_OPEN && rc != SMX_CHANNEL_ERR_TIMEOUT
                         && rc < 0 )
                 {

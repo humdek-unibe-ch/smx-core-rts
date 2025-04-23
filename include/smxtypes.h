@@ -81,7 +81,7 @@ typedef struct smx_net_sig_s smx_net_sig_t;           /**< ::smx_net_sig_s */
 typedef struct smx_config_data_map_s smx_config_data_map_t;
 /** ::smx_msg_tsmem_data_maps_s */
 typedef struct smx_config_data_maps_s smx_config_data_maps_t;
-
+typedef void (*smx_source_callback_t)( smx_net_t* net );
 /**
  * The error state of a channel end
  */
@@ -398,6 +398,17 @@ struct smx_net_s
 };
 
 /**
+ *
+ */
+struct smx_net_source_s
+{
+    smx_source_callback_t callback;
+    smx_channel_t* port;
+};
+
+typedef struct smx_net_source_s smx_net_source_t;
+
+/**
  * The signature of a net
  */
 struct smx_net_sig_s
@@ -415,7 +426,7 @@ struct smx_net_sig_s
     struct {
         int count;                  /**< the number of connected source ports */
         /** an array of channel pointers */
-        smx_channel_t* ports[SMX_MAX_SOURCE_CHS];
+        smx_net_source_t items[SMX_MAX_SOURCE_CHS];
     } source;                       /**< internal input channel for sources */
 };
 

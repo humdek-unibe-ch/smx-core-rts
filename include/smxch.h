@@ -390,6 +390,7 @@ void smx_channel_destroy_end( smx_channel_end_t* end );
  *              went wrong.
  */
 smx_msg_t* smx_channel_read( void* h, smx_channel_t* ch );
+smx_msg_t* smx_channel_read_rts( void* h, smx_channel_t* ch );
 
 /**
  * @brief Returns the number of available messages in channel
@@ -488,6 +489,7 @@ void smx_channel_terminate_source( smx_channel_t* ch );
  * @return      0 on success, -1 otherwise
  */
 int smx_channel_write( void* h, smx_channel_t* ch, smx_msg_t* msg );
+int smx_channel_write_rts( void* h, smx_channel_t* ch, smx_msg_t* msg );
 
 /**
  * Create a collector structure and initialize it.

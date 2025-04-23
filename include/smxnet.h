@@ -402,6 +402,22 @@ int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
 smx_msg_t* smx_net_source_read( smx_net_t* net, int idx );
 
 /**
+ * Register a callback function to handle blocking calls to external libraries.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @param callback
+ *  The callback function to register. The callback function has no return
+ *  value and takes the net pointer as argument.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_register_callback( smx_net_t* net, int idx,
+        smx_source_callback_t callback );
+
+/**
  * Write to the source queue of the net.
  *
  * @param net
