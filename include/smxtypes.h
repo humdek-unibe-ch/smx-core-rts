@@ -82,7 +82,7 @@ typedef struct smx_config_data_map_s smx_config_data_map_t;
 /** ::smx_msg_tsmem_data_maps_s */
 typedef struct smx_config_data_maps_s smx_config_data_maps_t;
 /** The source callback function signature */
-typedef void (*smx_source_callback_t)( smx_net_t* net );
+typedef int (*smx_source_callback_t)( smx_net_t* net );
 /**
  * The error state of a channel end
  */
@@ -99,6 +99,7 @@ enum smx_channel_err_e
     SMX_CHANNEL_ERR_TIMEOUT = -92,       /**< the channel operation timed out */
     SMX_CHANNEL_ERR_CV = -91,            /**< the conditional variable lock failed */
     SMX_CHANNEL_ERR_OPEN = -90,          /**< no channel is connectd */
+    SMX_CHANNEL_ERR_BAD_IDX = -89,       /**< source channel has bad index */
 };
 
 /**
@@ -410,6 +411,8 @@ struct smx_net_source_s
     smx_source_callback_t callback;
     /** The source channel. */
     smx_channel_t* port;
+    /** The log category for the channel */
+    char cat[1000];
 };
 
 typedef struct smx_net_source_s smx_net_source_t;

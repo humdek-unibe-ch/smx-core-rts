@@ -39,6 +39,12 @@ int smx_channel_await( void *h, smx_channel_t* ch )
         return -1;
     }
 
+    if( ch->sink->net == NULL )
+    {
+        // ignore open channels
+        return 0;
+    }
+
     ch->source->err = SMX_CHANNEL_ERR_NONE;
 
     pthread_mutex_lock( &ch->ch_mutex);
@@ -284,6 +290,11 @@ smx_msg_t* smx_channel_read_rts( void* h, smx_channel_t* ch )
         return NULL;
     }
 
+    if( ch->source->net == NULL )
+    {
+        return NULL;
+    }
+
     if( ch->source->err != SMX_CHANNEL_ERR_NONE )
     {
         return NULL;
@@ -520,6 +531,13 @@ int smx_channel_write_rts( void* h, smx_channel_t* ch, smx_msg_t* msg )
     {
         SMX_LOG_MAIN( main, fatal, "channel not initialised" );
         return -1;
+    }
+
+    if( ch->sink->net == NULL )
+    {
+        SMX_LOG_MAIN( main, debug, "channel is open, dismissing message" );
+        smx_msg_destroy( h, msg, true );
+        return 0;
     }
 
     if( msg == NULL )

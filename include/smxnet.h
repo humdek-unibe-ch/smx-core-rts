@@ -389,6 +389,30 @@ int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
         int* idx );
 
 /**
+ * Disconnect the source channel from the net.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_disable( smx_net_t* net, int idx );
+
+/**
+ * Connect the source channel to the net.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @return
+ *  0 on success, -1 on failure.
+ */
+int smx_net_source_enable( smx_net_t* net, int idx );
+
+/**
  * Read from the source queue of the net.
  *
  * @param net
@@ -409,8 +433,9 @@ smx_msg_t* smx_net_source_read( smx_net_t* net, int idx );
  * @param idx
  *  The index of the source port.
  * @param callback
- *  The callback function to register. The callback function has no return
- *  value and takes the net pointer as argument.
+ *  The callback function to register. The callback function must return 0 on
+ *  success or a negative error code on failure and it takes the net pointer as
+ *  argument.
  * @return
  *  0 on success, -1 on failure.
  */

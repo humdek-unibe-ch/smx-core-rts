@@ -1,3 +1,18 @@
+# `v1.3.0` (pending)
+
+### New Features
+- Allow to enable and disable source queues with `smx_net_source_enable()` and
+  `smx_net_source_disable()`.
+- Add channel error code for source channels.
+
+### Changes
+- The source channel callback must now return 0 on success and -1 on failure.
+
+### Bug Fixes
+- Fix the log category and ID of source channels.
+- Fix timeout handling of source channels.
+
+-------------------
 # `v1.2.0` (latest)
 
 ### New Features
