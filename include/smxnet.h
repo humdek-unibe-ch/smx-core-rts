@@ -435,7 +435,8 @@ smx_msg_t* smx_net_source_read( smx_net_t* net, int idx );
  * @param callback
  *  The callback function to register. The callback function must return 0 on
  *  success or a negative error code on failure and it takes the net pointer as
- *  argument.
+ *  argument. Make sure to return -1 on a external source timeout in order to
+ *  skip waiting for internal source channel trigger.
  * @return
  *  0 on success, -1 on failure.
  */
