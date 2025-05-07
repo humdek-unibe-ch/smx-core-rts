@@ -1,4 +1,4 @@
-# `v1.3.0` (pending)
+# `v1.3.0` (latest)
 
 ### New Features
 - Allow to enable and disable source queues with `smx_net_source_enable()` and
@@ -13,7 +13,7 @@
 - Fix timeout handling of source channels.
 
 -------------------
-# `v1.2.0` (latest)
+# `v1.2.0`
 
 ### New Features
 - Allow to add source queues with `smx_net_source_add()`.
