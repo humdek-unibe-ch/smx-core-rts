@@ -1,7 +1,8 @@
-# `v1.3.1` (latest)
+# `v1.4.0` (latest)
 
 ### Bug Fixes
 - Fix `lttngust` and `zlog` dependencies.
+- Update to `libsmxzlog-1.1`
 
 -------------------
 # `v1.3.0`
