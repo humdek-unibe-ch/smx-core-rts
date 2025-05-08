@@ -8,11 +8,11 @@
 # The version number of the box library ($(VMAJ).$(VMIN).$(VREV))
 VMAJ = 1
 VMIN = 3
-VREV = 0
+VREV = 1
 VDEB = 1
 
 # the RTS library
-SMX_LIBS = smxzlog-1.0 smxlttngust-0.1 smxurcu-0.1
+SMX_LIBS = smxzlog-1.1 smxlttngust-0.2 smxurcu-0.1
 
 # the name of the library
 LIBNAME = smxrts
