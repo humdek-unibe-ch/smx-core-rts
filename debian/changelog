@@ -1,3 +1,9 @@
+libsmxrts1.3 (1.3.1-1) focal; urgency=medium
+
+  * fix lttdngust and zlog dependencies
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Thu, 08 May 2025 11:12:39 +0200
+
 libsmxrts1.3 (1.3.0-1) bionic; urgency=medium
 
   * Initial release
