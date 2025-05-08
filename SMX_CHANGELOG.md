@@ -1,4 +1,10 @@
-# `v1.3.0` (latest)
+# `v1.3.1` (latest)
+
+### Bug Fixes
+- Fix `lttngust` and `zlog` dependencies.
+
+-------------------
+# `v1.3.0`
 
 ### New Features
 - Allow to enable and disable source queues with `smx_net_source_enable()` and
