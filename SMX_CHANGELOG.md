@@ -1,3 +1,9 @@
+# `v1.4.1` (pending)
+
+### Changes
+- Only log failed source channel access if it was no timeout.
+
+-------------------
 # `v1.4.0` (latest)
 
 ### Bug Fixes
