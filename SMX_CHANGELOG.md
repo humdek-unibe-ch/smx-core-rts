@@ -1,5 +1,8 @@
 # `v1.4.1` (pending)
 
+### Improvements
+- Make map operations more verbose.
+
 ### Changes
 - Only log failed source channel access if it was no timeout.
 
