@@ -174,11 +174,6 @@ int smx_config_data_maps_apply_ext_iter( bson_iter_t* i_tgt,
                 payload, maps );
         if( rc == 0 )
         {
-            if( maps->h )
-            {
-                SMX_LOG_NET( maps->h, debug, "appended mapped value at '%s'",
-                        dot_key );
-            }
             continue;
         }
         if( BSON_ITER_HOLDS_DOCUMENT( i_tgt )
@@ -364,6 +359,10 @@ int smx_config_data_map_append_val( const char* dot_key,
             if( strcmp( maps->items[i].src_path, "." ) == 0 )
             {
                 BSON_APPEND_DOCUMENT( payload, iter_key, src_payload_item );
+                if( maps->h )
+                {
+                    SMX_LOG_NET( maps->h, debug, "appended root payload" );
+                }
                 return 0;
             }
 
@@ -484,6 +483,22 @@ int smx_config_data_map_append_val( const char* dot_key,
                         BSON_APPEND_DOCUMENT( payload, iter_key, &doc );
                         bson_destroy( &doc );
                     }
+                }
+                else
+                {
+                    if( maps->h )
+                    {
+                        SMX_LOG_NET( maps->h, warn,
+                                "unexpected mapping type %d at '%s'",
+                                maps->items[i].type, dot_key );
+                    }
+                    return SMX_CONFIG_MAP_ERROR_BAD_TYPE_OPTION;
+                }
+                if( maps->h )
+                {
+                    SMX_LOG_NET( maps->h, debug,
+                            "appended mapped value of type %d at '%s'",
+                            maps->items[i].type, dot_key );
                 }
                 return 0;
             }
@@ -719,7 +734,7 @@ int smx_config_data_map_init_tgt_utf8( bson_t* data,
         smx_config_data_map_t* map, const char* tgt_path, bool* is_extended )
 {
     map->tgt_path = tgt_path;
-    bson_type_t type;
+    bson_type_t type = BSON_TYPE_UNDEFINED;
     if( !smx_config_data_map_get_iter( data, map->tgt_path,
                 &map->tgt_iter ) )
     {
