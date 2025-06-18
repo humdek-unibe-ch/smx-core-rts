@@ -577,6 +577,11 @@ smx_msg_t* smx_net_source_read( smx_net_t* net, int idx )
     err = smx_get_read_error( net->sig->source.items[idx].port );
     if( msg == NULL && err < 0 )
     {
+        if( err == SMX_CHANNEL_ERR_TIMEOUT )
+        {
+            SMX_LOG( net, info, "read timeout at source port %d", idx );
+            return NULL;
+        }
         goto error;
     }
 

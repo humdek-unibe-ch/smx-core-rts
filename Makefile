@@ -82,19 +82,19 @@ $(CREATE_DIR):
 	mkdir -p $@
 
 install:
-	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF)
+	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF) $(TGT_DOC)
 	cp -a $(INCLUDES) $(TGT_INCLUDE)/.
 	cp -a $(LOC_LIB_DIR)/$(LLIBNAME).so $(TGT_LIB)/$(SONAME)
-	cp -ar schemas $(TGT_CONF)/.
 	ln -sf $(SONAME) $(TGT_LIB)/$(VLIBNAME).so
-	ln -sf $(SONAME) $(TGT_LIB)/$(LLIBNAME).so
+	cp -ar schemas $(TGT_CONF)/.
+	cp -a README.md $(TGT_DOC)/README.md
 
 uninstall:
 	rm $(addprefix $(TGT_INCLUDE)/,$(notdir $(wildcard $(INCLUDES))))
 	rm $(TGT_LIB)/$(SONAME)
 	rm $(TGT_LIB)/$(VLIBNAME).so
-	rm $(TGT_LIB)/$(LLIBNAME).so
-	rm -r $(TGT_CONF)
+	rm -rf $(TGT_CONF)
+	rm -rf $(TGT_DOC)
 
 clean:
 	rm -rf $(LOC_LIB_DIR)
