@@ -1,4 +1,4 @@
-# `v1.4.1` (pending)
+# `v1.4.1` (latest)
 
 ### Improvements
 - Make map operations more verbose.
@@ -7,7 +7,7 @@
 - Only log failed source channel access if it was no timeout.
 
 -------------------
-# `v1.4.0` (latest)
+# `v1.4.0`
 
 ### Bug Fixes
 - Fix `lttngust` and `zlog` dependencies.
