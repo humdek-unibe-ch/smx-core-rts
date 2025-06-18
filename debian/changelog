@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.1-1) focal; urgency=medium
+
+  * some tweaking on soure channel logs
+  * make map operations more verbose
+  * some cosmetic changes in the makefile
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Wed, 18 Jun 2025 10:29:36 +0200
+
 libsmxrts1.4 (1.4.0-1) bionic; urgency=medium
 
   * Initial release
