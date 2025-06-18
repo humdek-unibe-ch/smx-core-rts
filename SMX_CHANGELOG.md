@@ -9,8 +9,13 @@
 -------------------
 # `v1.4.0`
 
+### Changes
+- Update to `libsmxzlog-1.1`
+
+-------------------
+# `v1.3.1`
+
 ### Bug Fixes
-- Fix `lttngust` and `zlog` dependencies.
 - Update to `libsmxzlog-1.1`
 
 -------------------
