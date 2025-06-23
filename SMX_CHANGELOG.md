@@ -1,4 +1,13 @@
-# `v1.4.1` (latest)
+# Changelog
+
+-------------------
+## `v1.4.2` (latest)
+
+### Bug Fixes
+- Fix `liburcu` dependencies.
+
+-------------------
+## `v1.4.1`
 
 ### Improvements
 - Make map operations more verbose.
@@ -7,19 +16,19 @@
 - Only log failed source channel access if it was no timeout.
 
 -------------------
-# `v1.4.0`
+## `v1.4.0`
 
 ### Changes
 - Update to `libsmxzlog-1.1`
 
 -------------------
-# `v1.3.1`
+## `v1.3.1`
 
 ### Bug Fixes
 - Update to `libsmxzlog-1.1`
 
 -------------------
-# `v1.3.0`
+## `v1.3.0`
 
 ### New Features
 - Allow to enable and disable source queues with `smx_net_source_enable()` and
@@ -34,7 +43,7 @@
 - Fix timeout handling of source channels.
 
 -------------------
-# `v1.2.0`
+## `v1.2.0`
 
 ### New Features
 - Allow to add source queues with `smx_net_source_add()`.
@@ -46,7 +55,7 @@
 - Fix `lttng-ust` dependencies.
 
 -------------------
-# `v1.1.2`
+## `v1.1.2`
 
 ### Improvements
 - When using maps in extended mode, integers are now automatically upgraded to
@@ -54,13 +63,13 @@
   in non-extended mode as I cannot overwrite an integer field with a double.
 
 -------------------
-# `v1.1.1`
+## `v1.1.1`
 
 ### Changes
 - Use LTTng UST Streamix wrapper library to avoid dependency problems.
 
 -------------------
-# `v1.1.0`
+## `v1.1.0`
 
 ### New Features
 - Allow to activate a blocking read operation from a decoupled input port with
@@ -80,7 +89,7 @@
 - `smx_channel_await()` blocks until a channel is ready.
 
 -------------------
-# `v1.0.0`
+## `v1.0.0`
 
 ### Changes
 - Debianize directly this repo instead of a wrapper repo
@@ -89,32 +98,32 @@
   instead.
 
 -------------------
-# `v0.10.4`
+## `v0.10.4`
 
 ### Bug Fixes
 - Fix memory leak.
 - Fix configuration map memory  initialisation.
 
 -------------------
-# `v0.10.3`
+## `v0.10.3`
 
 ### Bug Fixes
 - Make maps independent of target key order (type and path).
 
 -------------------
-# `v0.10.2`
+## `v0.10.2`
 
 ### Bug Fixes
 - Fix segfault on app name if a map is passed but no `experiment_id` is set.
 
 -------------------
-# `v0.10.1`
+## `v0.10.1`
 
 ### Bug Fixes
 - Fix macro signature for setting a channel read timeout in test modus.
 
 -------------------
-# `v0.10.0`
+## `v0.10.0`
 
 ### New Features
 - Add logging to mapping functions.
@@ -130,25 +139,25 @@
 - Fix memory leaks when RTS initialisation fails.
 
 -------------------
-# `v0.9.3` (deprecated)
+## `v0.9.3` (deprecated)
 
 ### New Features
 - Allow to disable a net through the configuration option `is_disabled`.
 
 -------------------
-# `v0.9.2`
+## `v0.9.2`
 
 ### New Features
 - Allow to set the backup buffer of a channel through an input port.
 
 -------------------
-# `v0.9.1`
+## `v0.9.1`
 
 ### Bug Fixes
 - Fix log dependency
 
 -------------------
-# `v0.9.0`
+## `v0.9.0`
 
 ### Changes
 - Versioning dvl package
@@ -159,7 +168,7 @@
 - Extends data mappings with a key to later identify a mapping.
 
 -------------------
-# `v0.8.4`
+## `v0.8.4`
 
 ### Bug Fixes
 - Fix channel timeout handling (nsec values were simply added without taking
@@ -167,27 +176,27 @@
 - Fix memory leak in config maps.
 
 -------------------
-# `v0.8.3`
+## `v0.8.3`
 
 ### Changes
 - Only log FIFO tail overwrite to `notice` if the FIFO length `>1`,
   use `info` otherwise.
 
 -------------------
-# `v0.8.2`
+## `v0.8.2`
 
 ### Bug Fixes
 - Fix a problem with data mappings when payloads or source paths are not
   defined.
 
 -------------------
-# `v0.8.1`
+## `v0.8.1`
 
 ### New Features
 - Improve config data maps to increase usability
 
 -------------------
-# `v0.8.0`
+## `v0.8.0`
 
 ### Changes
 - `smx_program_init()` now expects additional parameters `app_conf_maps` and
@@ -207,20 +216,20 @@
 - Improve config read function for double values.
 
 -------------------
-# `v0.7.2`
+## `v0.7.2`
 
 ### New Features
 - Add getter defines for net attributes (loop count, thread prio).
 
 -------------------
-# `v0.7.1`
+## `v0.7.1`
 
 ### Bug Fixes
 - Terminate a routing node if all input channels have terminated and not
   whenever any input channel terminates.
 
 -------------------
-# `v0.7.0`
+## `v0.7.0`
 
 ### Bug Fixes
 - fix concurrency issue with collector mutex: move collector operations inside
@@ -236,20 +245,20 @@
 - Allow to allocate a state which can be shared between nets.
 
 -------------------
-# `v0.6.2`
+## `v0.6.2`
 
 ### Changes
 - Log a write warning if a fifo buffer was filled (and length is bigger than 1).
 
 -------------------
-# `v0.6.1`
+## `v0.6.1`
 
 ### Changes
 - Pass net pointer to the content filter.
 - Only log failed write channel access to terminated consumer once.
 
 -------------------
-# `v0.6.0`
+## `v0.6.0`
 
 ### Bug Fixes
 - Fix the counting mechanism in the test functions to allow for multiple reads
@@ -265,7 +274,7 @@
   RTS have been removed.
 
 -------------------
-# `v0.5.6`
+## `v0.5.6`
 
 ### Bug Fixes
 - fix open port connection problem when open port is omitted in Streamix
@@ -276,13 +285,13 @@
 - add base message type definitions
 
 -------------------
-# `v0.5.5`
+## `v0.5.5`
 
 ### Bug Fixes
 - fix test channel write macro
 
 -------------------
-# `v0.5.4`
+## `v0.5.4`
 
 ### Bug Fixes
 - fix test dataset indexing
@@ -291,26 +300,26 @@
 - log net execution count
 
 -------------------
-# `v0.5.3`
+## `v0.5.3`
 
 ### Changes
 - allocate/free channel name
 
 -------------------
-# `v0.5.2`
+## `v0.5.2`
 
 ### Changes
 - allocate/free net and impl name
 
 -------------------
-# `v0.5.1`
+## `v0.5.1`
 
 ### Bug Fixes
 - fix memory leak
 - protect content filter setter with mutex
 
 -------------------
-# `v0.5.0`
+## `v0.5.0`
 
 ### Bug Fixes
 - improve log messages
@@ -326,7 +335,7 @@
 - allow to dynamically configure each net
 
 -------------------
-# `v0.4.0`
+## `v0.4.0`
 
 ### Bug Fixes
 - check whether channel is null before setting type filter
@@ -344,21 +353,21 @@
 - update to new debian files
 
 -------------------
-# `v0.3.2`
+## `v0.3.2`
 
 ### Bug Fixes
 - now, general boolean properties of a net are read correctly.
 - first check message type filter, then check message content filter.
 
 -------------------
-# `v0.3.1`
+## `v0.3.1`
 
 ### Changes
 - Log version numbers on level NOTICE.
 - Log RTS version number.
 
 -------------------
-# `v0.3.0`
+## `v0.3.0`
 
 ### Bug Fixes
 - fix some typos
@@ -368,7 +377,7 @@
 - Allow to configure whether a message is backed up in a decoupled channel.
 
 -------------------
-# `v0.2.1`
+## `v0.2.1`
 
 ### Bug Fixes
 - fix deadline miss reports on non-TT nets (#16)
@@ -397,7 +406,7 @@
   filter can be disabled globally with a boolean config option `type_filter`.
 
 -------------------
-# `v0.1.0`
+## `v0.1.0`
 
 ### Bug Fixes
 - fix the TF read function (#1)
@@ -437,6 +446,6 @@
 - At the end of an app execution log execution time and box execution counts
 
 -------------------
-# `diss_final`
+## `diss_final`
 
 The initial release after completing the [dissertation](https://uhra.herts.ac.uk/handle/2299/21094).
