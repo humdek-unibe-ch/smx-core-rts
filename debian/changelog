@@ -1,3 +1,10 @@
+libsmxrts1.4 (1.4.2-1) focal; urgency=medium
+
+  * fix old changelog entries
+  * fix urcu dependencies
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Mon, 23 Jun 2025 15:28:16 +0200
+
 libsmxrts1.4 (1.4.1-1) focal; urgency=medium
 
   * some tweaking on soure channel logs
