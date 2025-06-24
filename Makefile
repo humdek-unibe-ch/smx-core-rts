@@ -19,7 +19,8 @@ VLIBNAME = $(LLIBNAME)-$(LIB_VERSION)
 SONAME = $(LLIBNAME).so.$(LIB_VERSION)
 ANAME = $(LLIBNAME).a
 
-TGT_INCLUDE = $(DESTDIR)/usr/include/smx/$(VLIBNAME)
+TGT_INCLUDE_BASE = $(DESTDIR)/usr/include/smx
+TGT_INCLUDE = $(TGT_INCLUDE_BASE)/$(VLIBNAME)
 TGT_LIB = $(DESTDIR)/usr/lib/x86_64-linux-gnu
 TGT_DOC = $(DESTDIR)/usr/share/doc/$(LLIBNAME)$(LIB_VERSION)
 TGT_CONF = $(DESTDIR)/etc/smx/$(LLIBNAME)$(LIB_VERSION)
@@ -34,13 +35,16 @@ INCLUDES = $(LOC_INC_DIR)/*.h
 
 INCLUDES_DIR = -I$(LOC_INC_DIR) \
 			   -I/usr/include/libbson-1.0 \
-			   $(INC_SMXZLOG) \
+			   $(patsubst %, -I$(TGT_INCLUDE_BASE)/lib%, $(SMX_LIBS)) \
 			   -I.
+
+LINK_DIR = -L/usr/local/lib \
+	$(patsubst %, -L$(TGT_LIB)/lib%, $(SMX_LIBS)) \
+	-L$(TGT_LIB) $(EXT_LIBS_DIR)
 
 LINK_FILE = -lpthread \
 	-lbson-1.0 \
-	$(LIB_SMXZLOG) \
-	-llttng-ust \
+	$(patsubst %, -l%, $(SMX_LIBS)) \
 	-ldl
 
 CFLAGS = -Wall -fPIC -DLIBSMXRTS_VERSION=\"$(UPSTREAM_VERSION)\"
@@ -78,19 +82,19 @@ $(CREATE_DIR):
 	mkdir -p $@
 
 install:
-	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF)
+	mkdir -p $(TGT_LIB) $(TGT_INCLUDE) $(TGT_CONF) $(TGT_DOC)
 	cp -a $(INCLUDES) $(TGT_INCLUDE)/.
 	cp -a $(LOC_LIB_DIR)/$(LLIBNAME).so $(TGT_LIB)/$(SONAME)
-	cp -ar schemas $(TGT_CONF)/.
 	ln -sf $(SONAME) $(TGT_LIB)/$(VLIBNAME).so
-	ln -sf $(SONAME) $(TGT_LIB)/$(LLIBNAME).so
+	cp -ar schemas $(TGT_CONF)/.
+	cp -a README.md $(TGT_DOC)/README.md
 
 uninstall:
 	rm $(addprefix $(TGT_INCLUDE)/,$(notdir $(wildcard $(INCLUDES))))
 	rm $(TGT_LIB)/$(SONAME)
 	rm $(TGT_LIB)/$(VLIBNAME).so
-	rm $(TGT_LIB)/$(LLIBNAME).so
-	rm -r $(TGT_CONF)
+	rm -rf $(TGT_CONF)
+	rm -rf $(TGT_DOC)
 
 clean:
 	rm -rf $(LOC_LIB_DIR)

@@ -1,4 +1,13 @@
-# `v1.0.1` (latest)
+# `v1.0.2` (latest)
+
+### Changes
+
+- Update to `libsmxzlog1.1`.
+- Use Streamix lttng dependency.
+
+
+-------------------
+# `v1.0.1`
 
 ### New Features
 
