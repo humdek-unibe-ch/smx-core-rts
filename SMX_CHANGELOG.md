@@ -1,4 +1,12 @@
-# `v1.0.2` (latest)
+# `v1.0.3` (latest)
+
+### Changes
+
+- Downgrade to `libsmxzlog1.0`.
+
+
+-------------------
+# `v1.0.2`
 
 ### Changes
 
