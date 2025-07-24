@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.2` (latest)
+## `v1.4.3` (latest)
+
+### Bug Fixes
+- Fix dependency order.
+
+-------------------
+## `v1.4.2`
 
 ### Bug Fixes
 - Fix `liburcu` dependencies.
