@@ -1,3 +1,10 @@
+libsmxrts1.4 (1.4.3-1) focal; urgency=medium
+
+  * fix dependency order
+  * Create documentation files for new release v1.4.3
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Thu, 24 Jul 2025 15:43:48 +0200
+
 libsmxrts1.4 (1.4.2-1) focal; urgency=medium
 
   * fix old changelog entries
