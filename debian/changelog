@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.4-1) focal; urgency=medium
+
+  * skip configuration port at net blocking check
+  * new revision
+  * Create documentation files for new release v1.4.4
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Thu, 07 Aug 2025 17:21:44 +0200
+
 libsmxrts1.4 (1.4.3-1) focal; urgency=medium
 
   * fix dependency order
