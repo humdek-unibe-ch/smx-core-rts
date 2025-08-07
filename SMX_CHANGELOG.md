@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.3` (latest)
+## `v1.4.4` (latest)
+
+### Bug Fixes
+- Exclude config port on net blocking check to avoid permanent blocking of a box with a configuration port.
+
+-------------------
+## `v1.4.3`
 
 ### Bug Fixes
 - Fix dependency order.
