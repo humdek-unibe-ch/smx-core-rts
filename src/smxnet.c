@@ -658,7 +658,7 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
     int state = SMX_NET_CONTINUE;
     int rc;
     int i;
-    smx_channel_t* conf_port;
+    smx_channel_t* conf_port = NULL;
     smx_channel_err_t c_err;
     smx_msg_t* msg;
     bson_error_t b_err;
@@ -840,11 +840,14 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
             }
             for( int i = 0; i < h->sig->in.count; i++)
             {
-                rc = smx_channel_await( h, h->sig->in.ports[i] );
-                if( rc != SMX_CHANNEL_ERR_OPEN && rc != SMX_CHANNEL_ERR_TIMEOUT
-                        && rc < 0 )
+                if( h->sig->in.ports[i] != conf_port )
                 {
-                    goto smx_terminate_net;
+                    rc = smx_channel_await( h, h->sig->in.ports[i] );
+                    if( rc != SMX_CHANNEL_ERR_OPEN && rc != SMX_CHANNEL_ERR_TIMEOUT
+                            && rc < 0 )
+                    {
+                        goto smx_terminate_net;
+                    }
                 }
             }
         }
