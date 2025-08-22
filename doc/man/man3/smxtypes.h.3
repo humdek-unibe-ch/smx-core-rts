@@ -1,4 +1,4 @@
-.TH "include/smxtypes.h" 3 "Thu Aug 7 2025" "Version v1.4.4" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxtypes.h" 3 "Fri Aug 22 2025" "Version v1.4.5" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -314,9 +314,7 @@ bson_t * \fIsrc_payload\fP
 const char * \fIsrc_prefix\fP An optional prefix to be prpended to the source path\&. This is useful if several batches of maps are initialised where source paths might coincide\&. 
 .br
 .PP
-bson_iter_t \fItgt_iter\fP The target value location iterator 
-.br
- 
+bson_iter_t \fItgt_iter\fP The target value location iterator\&. For basic mappings, this acts on the maps->mapped_payload\&. For extended mappings, this acts on the maps->tgt_payload\&. 
 .br
 .PP
 const char * \fItgt_path\fP The target value location (use dot-notation) 
