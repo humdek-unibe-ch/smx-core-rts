@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.5-1) focal; urgency=medium
+
+  * implement simple string interpolation on maps
+  * Create documentation files for new release v1.4.5
+  * Create package files for new release v1.4.5
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Fri, 22 Aug 2025 16:20:06 +0200
+
 libsmxrts1.4 (1.4.4-1) focal; urgency=medium
 
   * skip configuration port at net blocking check
