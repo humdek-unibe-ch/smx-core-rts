@@ -1,7 +1,16 @@
 # Changelog
 
 -------------------
-## `v1.4.4` (latest)
+## `v1.4.5` (latest)
+
+### New Features
+- Allow string interpolation in maps: Use printf syntax and make sure to only interpolate one variable.
+
+### Bug Fixes
+- Update `map->tgt_iter` for extended maps to avoid conflicts.
+
+-------------------
+## `v1.4.4`
 
 ### Bug Fixes
 - Exclude config port on net blocking check to avoid permanent blocking of a box with a configuration port.

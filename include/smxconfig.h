@@ -427,6 +427,30 @@ int smx_config_init_double( bson_t* conf, const char* search, double* val );
 int smx_config_init_int( bson_t* conf, const char* search, int* val );
 
 /**
+ * Checks whether a string includes at most one sprinf fromat specifier.
+ *
+ * @param s
+ *  The string to check
+ * @param type
+ *  A BSON type to which the format specifier must be compatible.
+ * @return
+ *  true if the string is a format string, false otherwise.
+ */
+bool smx_config_is_format_string(const char* s, bson_type_t type );
+
+/**
+ * Check if a given format specifier corresponds to a BSON type.
+ *
+ * @param spec
+ *  The format specifier.
+ * @param type
+ *  The BSON type.
+ * @return
+ *  true if the specifier matches the type, false otherwise.
+ */
+bool smx_config_specifier_allowed_for_bson( char spec, bson_type_t type );
+
+/**
  * Return a human-readable error message, give an error code.
  *
  * @param err
