@@ -302,6 +302,17 @@ int smx_config_data_maps_init( bson_iter_t* i_fields, bson_t* data,
         }
     }
 
+    if( maps->is_extended )
+    {
+        for( int i = 0; i < maps->count; i++ )
+        {
+            // re-assign iterators in extended mode as  here, the mapped
+            // payload will not persist.
+            smx_config_data_map_get_iter( maps->tgt_payload,
+                    maps->items[i].tgt_path, &maps->items[i].tgt_iter );
+        }
+    }
+
     if( maps->count == 0 ) {
         return SMX_CONFIG_MAP_ERROR_NO_MAP_ITEM;
     }
@@ -328,9 +339,12 @@ int smx_config_data_map_append_val( const char* dot_key,
         smx_config_data_maps_t* maps )
 {
     int i;
+    bool is_format_string = false;
     const bson_oid_t* oid;
     bson_oid_t oid_init;
     char oid_str[25];
+    char buf[2048];
+    const char* tgt_str;
     bson_t* src_payload_item = src_payload;
     bson_iter_t* src_child;
     char src_path[256];
@@ -338,6 +352,11 @@ int smx_config_data_map_append_val( const char* dot_key,
     uint32_t data_len;
     const uint8_t* data_doc;
     bson_t doc;
+    const char* val_str;
+    double val_d;
+    bool val_b;
+    int32_t val_i;
+    int64_t val_li;
 
     for( i = 0; i < maps->count; i++ )
     {
@@ -386,16 +405,91 @@ int smx_config_data_map_append_val( const char* dot_key,
                 }
                 else if( maps->items[i].type == BSON_TYPE_UTF8 )
                 {
+                    val_str = NULL;
+                    tgt_str = bson_iter_utf8( &maps->items[i].tgt_iter, NULL );
+                    is_format_string = smx_config_is_format_string( tgt_str,
+                            bson_iter_type( src_child ) );
                     if( BSON_ITER_HOLDS_OID( src_child ) )
                     {
                         oid = bson_iter_oid( src_child );
                         bson_oid_to_string( oid, oid_str );
-                        BSON_APPEND_UTF8( payload, iter_key, oid_str );
+                        val_str = oid_str;
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_str );
+                            val_str = buf;
+                        }
                     }
                     else if( BSON_ITER_HOLDS_UTF8( src_child ) )
                     {
-                        BSON_APPEND_UTF8( payload, iter_key,
-                                bson_iter_utf8( src_child, NULL ) );
+                        val_str = bson_iter_utf8( src_child, NULL );
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_str );
+                            val_str = buf;
+                        }
+                    }
+                    else if( BSON_ITER_HOLDS_DOUBLE( src_child ) )
+                    {
+                        val_d = bson_iter_double( src_child );
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_d );
+                        }
+                        else
+                        {
+                            snprintf( buf, sizeof( buf ), "%f", val_d );
+                        }
+                        val_str = buf;
+                    }
+                    else if( BSON_ITER_HOLDS_INT32( src_child ) )
+                    {
+                        val_i = bson_iter_int32( src_child );
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_i );
+                        }
+                        else
+                        {
+                            snprintf( buf, sizeof( buf ), "%d", val_i );
+                        }
+                        val_str = buf;
+                    }
+                    else if( BSON_ITER_HOLDS_INT64( src_child ) )
+                    {
+                        val_li = bson_iter_int64( src_child );
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_li );
+                        }
+                        else
+                        {
+                            snprintf( buf, sizeof( buf ), "%ld", val_li );
+                        }
+                        val_str = buf;
+                    }
+                    else if( BSON_ITER_HOLDS_BOOL( src_child ) )
+                    {
+                        val_b = bson_iter_bool( src_child );
+                        if( is_format_string )
+                        {
+                            snprintf( buf, sizeof( buf ), tgt_str, val_b );
+                        }
+                        else
+                        {
+                            snprintf( buf, sizeof( buf ), "%d", val_b );
+                        }
+                        val_str = buf;
+                    }
+                    if( val_str != NULL )
+                    {
+                        if( maps->h && is_format_string )
+                        {
+                            SMX_LOG_NET( maps->h, debug,
+                                    "string interpolation: %s -> %s",
+                                    tgt_str, val_str );
+                        }
+                        BSON_APPEND_UTF8( payload, iter_key, val_str );
                     }
                 }
                 else if( maps->items[i].type == BSON_TYPE_OID )
@@ -978,6 +1072,87 @@ int smx_config_init_int( bson_t* conf, const char* search, int* val )
     }
     *val = res;
     return 0;
+}
+
+/*****************************************************************************/
+bool smx_config_is_format_string(const char* s, bson_type_t type )
+{
+    int count = 0;
+
+    if( s == NULL )
+    {
+        return false;
+    }
+
+
+    while( *s )
+    {
+        if( *s == '%' )
+        {
+            s++;
+
+            // escaped percent "%%"
+            if( *s == '%' )
+            {
+                s++;
+                continue;
+            }
+
+            // Skip flags, width, precision, length
+            while( strchr( "+-0 #", *s ) ) s++;
+            while( isdigit( ( unsigned char )*s ) ) s++;
+            if( *s == '.' )
+            {
+                s++;
+                while( isdigit( ( unsigned char )*s ) ) s++;
+            }
+
+            // length modifiers
+            while( strchr( "hljztL", *s ) ) s++;
+
+            // malformed format string (ends abruptly after %)
+            if( *s == '\0' )
+            {
+                return false;
+            }
+
+            if( smx_config_specifier_allowed_for_bson( *s, type ) )
+            {
+                count++;
+            }
+        }
+        else
+        {
+            s++;
+        }
+    }
+    return count == 1;
+}
+
+/*****************************************************************************/
+bool smx_config_specifier_allowed_for_bson( char spec, bson_type_t type )
+{
+    switch( type )
+    {
+        case BSON_TYPE_DOUBLE:
+            return strchr( "fFeEgGaA", spec ) != NULL;
+        case BSON_TYPE_UTF8:
+            return spec == 's';
+        case BSON_TYPE_BOOL:
+            return strchr( "diu", spec ) != NULL;
+        case BSON_TYPE_INT32:
+            return strchr( "di", spec ) != NULL;
+        case BSON_TYPE_INT64:
+        case BSON_TYPE_DATE_TIME:
+            return strchr( "di", spec ) != NULL; // assume long long handled with length modifier
+        case BSON_TYPE_OID:
+            return spec == 's'; // if user converts to hex string first
+        case BSON_TYPE_NULL:
+        case BSON_TYPE_ARRAY:
+        case BSON_TYPE_DOCUMENT:
+        default:
+            return false;
+    }
 }
 
 /*****************************************************************************/

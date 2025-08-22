@@ -285,7 +285,12 @@ struct smx_config_data_map_s
     bson_iter_t src_iter;
     bool is_src_iter_set;
     const char* tgt_path;    /**< The target value location (use dot-notation) */
-    bson_iter_t tgt_iter;    /**< The target value location iterator  */
+    /**
+     * The target value location iterator.
+     * For basic mappings, this acts on the maps->mapped_payload.
+     * For extended mappings, this acts on the maps->tgt_payload.
+     */
+    bson_iter_t tgt_iter;
     bson_t* src_payload;
     bson_type_t type;
     union {

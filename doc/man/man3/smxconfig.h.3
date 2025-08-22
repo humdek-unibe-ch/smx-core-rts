@@ -1,4 +1,4 @@
-.TH "include/smxconfig.h" 3 "Thu Aug 7 2025" "Version v1.4.4" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxconfig.h" 3 "Fri Aug 22 2025" "Version v1.4.5" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -108,6 +108,12 @@ include/smxconfig.h
 .br
 .ti -1c
 .RI "int \fBsmx_config_init_int\fP (bson_t *conf, const char *search, int *val)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_is_format_string\fP (const char *s, bson_type_t type)"
+.br
+.ti -1c
+.RI "bool \fBsmx_config_specifier_allowed_for_bson\fP (char spec, bson_type_t type)"
 .br
 .ti -1c
 .RI "const char * \fBsmx_config_strerror\fP (\fBsmx_config_error_t\fP err)"
@@ -580,6 +586,38 @@ Get an int from the config file\&.
 \fBReturns\fP
 .RS 4
 A negative error code or 0 on success\&. 
+.RE
+.PP
+
+.SS "bool smx_config_is_format_string (const char * s, bson_type_t type)"
+Checks whether a string includes at most one sprinf fromat specifier\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIs\fP The string to check 
+.br
+\fItype\fP A BSON type to which the format specifier must be compatible\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the string is a format string, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool smx_config_specifier_allowed_for_bson (char spec, bson_type_t type)"
+Check if a given format specifier corresponds to a BSON type\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIspec\fP The format specifier\&. 
+.br
+\fItype\fP The BSON type\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the specifier matches the type, false otherwise\&. 
 .RE
 .PP
 
