@@ -4,8 +4,7 @@
 ## `v1.4.5` (latest)
 
 ### New Features
-- Allow string interpolation in maps: Use printf syntax and make sure to only
-  interpolate one variable.
+- Allow string interpolation in maps: Use printf syntax and make sure to only interpolate one variable.
 
 ### Bug Fixes
 - Update `map->tgt_iter` for extended maps to avoid conflicts.
