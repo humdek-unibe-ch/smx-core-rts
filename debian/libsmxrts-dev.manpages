@@ -95,10 +95,12 @@ doc/man/man3/smxconfig.h.3
 doc/man/man3/smx_config_init_bool.3
 doc/man/man3/smx_config_init_double.3
 doc/man/man3/smx_config_init_int.3
+doc/man/man3/smx_config_is_format_string.3
 doc/man/man3/smx_config_map_error_e.3
 doc/man/man3/SMX_CONFIG_MAP_ERROR_NO_ERROR.3
 doc/man/man3/smx_config_map_error_t.3
 doc/man/man3/SMX_CONFIG_MAX_MAP_ITEMS.3
+doc/man/man3/smx_config_specifier_allowed_for_bson.3
 doc/man/man3/smx_config_strerror.3
 doc/man/man3/smx_connect.3
 doc/man/man3/SMX_CONNECT.3
