@@ -304,6 +304,7 @@ smx_msg_t* smx_channel_read_rts( void* h, smx_channel_t* ch )
             && ch->source->state != SMX_CHANNEL_END )
     {
         // await timed out
+        ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
         return NULL;
     }
 
