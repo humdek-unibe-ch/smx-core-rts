@@ -1,3 +1,10 @@
+libsmxrts1.4 (1.4.6-1) focal; urgency=medium
+
+  * set channel timeout error if await timed out
+  * Create documentation files for new release v1.4.6
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Thu, 04 Sep 2025 18:05:32 +0200
+
 libsmxrts1.4 (1.4.5-1) focal; urgency=medium
 
   * implement simple string interpolation on maps
