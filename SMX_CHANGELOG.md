@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.5` (latest)
+## `v1.4.6` (latest)
+
+### Bug Fixes
+- Set channel timeout error if await timed out.
+
+-------------------
+## `v1.4.5`
 
 ### New Features
 - Allow string interpolation in maps: Use printf syntax and make sure to only interpolate one variable.
