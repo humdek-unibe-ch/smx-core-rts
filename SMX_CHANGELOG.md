@@ -1,6 +1,12 @@
 # Changelog
 
 -------------------
+## `v1.4.7` (pending)
+
+### New Features
+- Allow to set a negative niceness value through the config option `niceness`.
+
+-------------------
 ## `v1.4.6` (latest)
 
 ### Bug Fixes
