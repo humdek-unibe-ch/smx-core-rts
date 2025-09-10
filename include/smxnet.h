@@ -42,6 +42,8 @@
  */
 #define SMX_LOG( h, level, format, ... )\
     SMX_LOG_NET( h, level, format, ##__VA_ARGS__ )
+#define SMX_LOG_RC( h, level, format, ... )\
+    SMX_LOG_NET_RC( h, level, format, ##__VA_ARGS__ )
 
 /**
  * @def SMX_NET_GET_CONF()

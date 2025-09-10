@@ -88,6 +88,26 @@
     SMX_LOG_INTERN( level, SMX_SIG_CAT( net ), format, ##__VA_ARGS__ )
 
 /**
+ * @def SMX_LOG_NET_RC()
+ *
+ * Rate-controlled logging.
+ */
+#define SMX_LOG_NET_RC( net, level, format, ... )\
+    do {\
+        if( ( ( smx_net_t* )net )->expected_rate == 0 )\
+        {\
+            SMX_LOG_INTERN( level, SMX_SIG_CAT( net ), format, ##__VA_ARGS__ );\
+        }\
+        else if( ( ( smx_net_t* )net )->count\
+                % ( ( smx_net_t* )net )->expected_rate == 0 )\
+        {\
+            SMX_LOG_INTERN( level, SMX_SIG_CAT( net ), "[+%d@%dms]" format,\
+                    ( ( smx_net_t* )net )->expected_rate,\
+                    1000 / ( ( smx_net_t* )net )->expected_rate, ##__VA_ARGS__ );\
+        }\
+    } while( 0 )
+
+/**
  * Define mutex protection and main categories for zlog. Further, initialise
  * zlog with the configuration file.
  *
