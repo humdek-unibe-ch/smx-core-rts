@@ -70,9 +70,12 @@ int smx_rn( void* h, void* state )
     if( msg == NULL )
         return SMX_NET_END;
 
-    for( i=0; i<count_out; i++ ) {
+    for( i = 0; i < count_out; i++ )
+    {
         if( i == count_out - 1 )
+        {
             smx_channel_write( h, chs_out[i], msg );
+        }
         else
         {
             msg_copy = smx_msg_copy( h, msg );
