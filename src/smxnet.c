@@ -9,6 +9,8 @@
  */
 #define _GNU_SOURCE
 
+#include <sys/syscall.h>
+#include <sys/resource.h>
 #include <pthread.h>
 #include <errno.h>
 #include <stdbool.h>
@@ -80,6 +82,7 @@ smx_msg_t* smx_net_collector_read( void* h, smx_collector_t* collector,
 smx_net_t* smx_net_create( unsigned int id, const char* name,
         const char* impl, const char* cat_name, smx_rts_t* rts, int prio )
 {
+    int niceness = 0;
     if( id >= SMX_MAX_NETS )
     {
         SMX_LOG_MAIN( main, fatal, "net count exeeds maximum %d", id );
@@ -138,6 +141,23 @@ smx_net_t* smx_net_create( unsigned int id, const char* name,
             "expected_rate" );
     net->shared_state_key = smx_net_get_string_prop( rts->conf, name, impl, id,
             "shared_state_key" );
+    niceness = smx_net_get_int_prop( rts->conf, name, impl, id,
+            "niceness" );
+    if( niceness > 0 )
+    {
+        SMX_LOG_NET( net, warn, "cannot set a niceness level of %d: must"
+                " be lower than zero, ignoring", niceness );
+    }
+    else if( niceness < 0 && net->priority > 0 )
+    {
+        SMX_LOG_NET( net, warn, "cannot set a niceness level of %d: net"
+                " already has a real-time priority of %d assigned",
+                niceness, net->priority );
+    }
+    else
+    {
+        net->priority = niceness;
+    }
 
     rts->net_cnt++;
     SMX_LOG_MAIN( net, info, "create net instance %s(%d)", name, id );
@@ -657,7 +677,7 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
     double elapsed_wall;
     int state = SMX_NET_CONTINUE;
     int rc;
-    int i;
+    int i, tid;
     smx_channel_t* conf_port = NULL;
     smx_channel_err_t c_err;
     smx_msg_t* msg;
@@ -679,6 +699,18 @@ void* smx_net_start_routine_with_shared_state( smx_net_t* h,
 
     if( h->has_profiler )
         SMX_LOG_NET( h, notice, "profiler enabled" );
+
+    if( h->priority < 0 )
+    {
+        tid = syscall( SYS_gettid );
+        rc = setpriority( PRIO_PROCESS, tid, h->priority );
+        if( rc < 0 )
+        {
+            SMX_LOG( h, warn, "failed to set priority: %s", strerror( errno ) );
+        }
+        SMX_LOG( h, notice, "thread has niceness value of %d",
+                getpriority( PRIO_PROCESS, tid ) );
+    }
 
     if( h->shared_state_key == NULL )
     {

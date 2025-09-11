@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.6` (latest)
+## `v1.4.7` (latest)
+
+### New Features
+- Allow to set a negative niceness value through the config option `niceness`.
+
+-------------------
+## `v1.4.6`
 
 ### Bug Fixes
 - Set channel timeout error if await timed out.
