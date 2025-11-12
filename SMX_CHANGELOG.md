@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.7` (latest)
+## `v1.4.8` (latest)
+
+### Improvement
+- Add read timeout on uninitialised decoupled channels.
+
+-------------------
+## `v1.4.7`
 
 ### New Features
 - Allow to set a negative niceness value through the config option `niceness`.
