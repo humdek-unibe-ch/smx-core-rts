@@ -300,10 +300,25 @@ smx_msg_t* smx_channel_read_rts( void* h, smx_channel_t* ch )
         return NULL;
     }
 
-    if( ch->source->state != SMX_CHANNEL_READY
+    if( ch->source->state == SMX_CHANNEL_UNINITIALISED )
+    {
+        // decoupled channel has not yet received any data
+        ch->source->err = SMX_CHANNEL_ERR_UNINITIALISED;
+        if( ch->source->timeout.tv_sec > 0 )
+        {
+            sleep( ch->source->timeout.tv_sec );
+            ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
+        }
+        if( ch->source->timeout.tv_nsec > 0 )
+        {
+            usleep( ch->source->timeout.tv_nsec / 1000 );
+            ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
+        }
+        return NULL;
+    } else if( ch->source->state != SMX_CHANNEL_READY
             && ch->source->state != SMX_CHANNEL_END )
     {
-        // await timed out
+        // await before main loop timed out
         ch->source->err = SMX_CHANNEL_ERR_TIMEOUT;
         return NULL;
     }
