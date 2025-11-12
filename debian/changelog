@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.8-1) focal; urgency=medium
+
+  * handle read timeout on decoupled input port
+  * new revision
+  * Create documentation files for new release v1.4.8
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Wed, 12 Nov 2025 16:26:25 +0100
+
 libsmxrts1.4 (1.4.7-1) focal; urgency=medium
 
   * allow to set the thread niceness value
