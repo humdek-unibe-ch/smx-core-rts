@@ -1,5 +1,11 @@
 libsmxrts1.4 (1.4.8-1) focal; urgency=medium
 
+  * Create package files for new release v1.4.8
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Mon, 19 Jan 2026 14:23:24 +0000
+
+libsmxrts1.4 (1.4.8-1) focal; urgency=medium
+
   * Initial release
 
  -- Simon Maurer <simon.maurer@unibe.ch>  Mon, 19 Jan 2026 14:23:23 +0000
