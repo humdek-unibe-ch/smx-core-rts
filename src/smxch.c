@@ -1050,10 +1050,6 @@ int smx_d_fifo_write( void* h, smx_channel_t* ch, smx_fifo_t* fifo,
             }
         }
         fifo->overwrite = 0;
-
-        if( new_count > 1 && new_count == fifo->length ) {
-            SMX_LOG_CH( ch, warn, "fifo_d full (new count: %d)", new_count );
-        }
         SMX_LOG_CH( ch, info, "write to fifo_d (new count: %d)", new_count );
     }
     else
