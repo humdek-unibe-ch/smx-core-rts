@@ -1029,7 +1029,7 @@ int smx_d_fifo_write( void* h, smx_channel_t* ch, smx_fifo_t* fifo,
     if( ch == NULL || fifo == NULL || msg == NULL )
         return -1;
 
-    SMX_LOG_CH( ch, debug, "prepare to write to fifo_d" );
+    SMX_LOG_CH( ch, debug, "prepare to write to d_fifo" );
     if( fifo->count < fifo->length )
     {
         fifo->tail->msg = msg;
@@ -1050,7 +1050,7 @@ int smx_d_fifo_write( void* h, smx_channel_t* ch, smx_fifo_t* fifo,
             }
         }
         fifo->overwrite = 0;
-        SMX_LOG_CH( ch, info, "write to fifo_d (new count: %d)", new_count );
+        SMX_LOG_CH( ch, info, "write to d_fifo (new count: %d)", new_count );
     }
     else
     {
