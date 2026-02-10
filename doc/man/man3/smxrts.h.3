@@ -1,4 +1,4 @@
-.TH "include/smxrts.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxrts.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -45,7 +45,7 @@ include/smxrts.h
 .RI "#define \fBSMX_CHANNEL_CREATE\fP(id,  len,  type,  name)"
 .br
 .ti -1c
-.RI "#define \fBSMX_CHANNEL_DESTROY\fP(id)   \fBsmx_channel_destroy\fP( rts\->chs[id] )"
+.RI "#define \fBSMX_CHANNEL_DESTROY\fP(id)       \fBsmx_channel_destroy\fP( rts\->chs[id] )"
 .br
 .ti -1c
 .RI "#define \fBSMX_CONNECT\fP(net_id,  ch_id,  box_name,  ch_name,  mode)"
@@ -60,49 +60,49 @@ include/smxrts.h
 .RI "#define \fBSMX_CONNECT_OPEN\fP(net_id,  box_name,  mode)"
 .br
 .ti -1c
-.RI "#define \fBSMX_CONNECT_RN\fP(net_id,  ch_id)   \fBsmx_connect_rn\fP( rts\->chs[ch_id], rts\->nets[net_id] )"
+.RI "#define \fBSMX_CONNECT_RN\fP(net_id,  ch_id)       \fBsmx_connect_rn\fP( rts\->chs[ch_id], rts\->nets[net_id] )"
 .br
 .ti -1c
-.RI "#define \fBSMX_CONNECT_TF\fP(net_id,  ch_in_id,  ch_out_id,  ch_name)   \fBsmx_connect_tf\fP( rts\->nets[net_id], rts\->chs[ch_in_id], rts\->chs[ch_out_id] )"
+.RI "#define \fBSMX_CONNECT_TF\fP(net_id,  ch_in_id,  ch_out_id,  ch_name)       \fBsmx_connect_tf\fP( rts\->nets[net_id], rts\->chs[ch_in_id], rts\->chs[ch_out_id] )"
 .br
 .ti -1c
 .RI "#define \fBSMX_NET_CREATE\fP(id,  net_name,  box_name,  prio)"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_DESTROY\fP(id)   \fBsmx_net_destroy\fP( rts\->nets[id] )"
+.RI "#define \fBSMX_NET_DESTROY\fP(id)       \fBsmx_net_destroy\fP( rts\->nets[id] )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_DESTROY_RN\fP(id)   \fBsmx_net_destroy_rn\fP( rts\->nets[id] );\\"
+.RI "#define \fBSMX_NET_DESTROY_RN\fP(id)       \fBsmx_net_destroy_rn\fP( rts\->nets[id] );\\"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_DESTROY_TF\fP(id)   \fBsmx_net_destroy_tf\fP( rts\->nets[id] );\\"
+.RI "#define \fBSMX_NET_DESTROY_TF\fP(id)       \fBsmx_net_destroy_tf\fP( rts\->nets[id] );\\"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_FINALIZE_TF\fP(net_id)   \fBsmx_net_finalize_tf\fP( rts\->nets[net_id] )"
+.RI "#define \fBSMX_NET_FINALIZE_TF\fP(net_id)       \fBsmx_net_finalize_tf\fP( rts\->nets[net_id] )"
 .br
 .ti -1c
 .RI "#define \fBSMX_NET_INIT\fP(id,  indegree,  outdegree,  box_name)"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_INIT_RN\fP(id)   \fBsmx_net_init_rn\fP( rts\->nets[id] )"
+.RI "#define \fBSMX_NET_INIT_RN\fP(id)       \fBsmx_net_init_rn\fP( rts\->nets[id] )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_INIT_TF\fP(id,  sec,  nsec)   \fBsmx_net_init_tf\fP( rts\->nets[id], sec, nsec )"
+.RI "#define \fBSMX_NET_INIT_TF\fP(id,  sec,  nsec)       \fBsmx_net_init_tf\fP( rts\->nets[id], sec, nsec )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_RUN\fP(id,  box_name)   \fBsmx_net_run\fP( rts\->ths, id, start_routine_ ## box_name, rts\->nets[id] )"
+.RI "#define \fBSMX_NET_RUN\fP(id,  box_name)       \fBsmx_net_run\fP( rts\->ths, id, start_routine_ ## box_name, rts\->nets[id] )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_WAIT_END\fP(id)   \fBsmx_net_wait_end\fP( rts\->ths[id] )"
+.RI "#define \fBSMX_NET_WAIT_END\fP(id)       \fBsmx_net_wait_end\fP( rts\->ths[id] )"
 .br
 .ti -1c
-.RI "#define \fBSMX_PROGRAM_INIT_CLEANUP\fP()   smx_program_init_cleanup( rts )"
+.RI "#define \fBSMX_PROGRAM_INIT_CLEANUP\fP()       smx_program_init_cleanup( rts )"
 .br
 .ti -1c
-.RI "#define \fBSMX_PROGRAM_INIT_RUN\fP()   \fBsmx_program_init_run\fP( rts )"
+.RI "#define \fBSMX_PROGRAM_INIT_RUN\fP()       \fBsmx_program_init_run\fP( rts )"
 .br
 .ti -1c
-.RI "#define \fBSTART_ROUTINE_NET\fP(h,  box_name)   \fBsmx_net_start_routine\fP( h, box_name, box_name ## _init, box_name ## _cleanup )"
+.RI "#define \fBSTART_ROUTINE_NET\fP(h,  box_name)       \fBsmx_net_start_routine\fP( h, box_name, box_name ## _init, box_name ## _cleanup )"
 .br
 .ti -1c
 .RI "#define \fBSTART_ROUTINE_NET_WITH_SHARED_STATE\fP(h,  box_name,  key)"
@@ -155,101 +155,93 @@ The runtime system library for Streamix
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define SMX_CHANNEL_CREATE(id, len, type, name)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    rts->chs[id] = smx_channel_create( &rts->ch_cnt, len, type, id, #name,\
+    rts\->chs[id] = smx_channel_create( &rts\->ch_cnt, len, type, id, #name,\\
             STRINGIFY( ch_ ## name ## _ ## id ) )
 .fi
 Macro to create a streamix channel\&. 
-.SS "#define SMX_CHANNEL_DESTROY(id)   \fBsmx_channel_destroy\fP( rts\->chs[id] )"
+.SS "#define SMX_CHANNEL_DESTROY(id)       \fBsmx_channel_destroy\fP( rts\->chs[id] )"
 Macro to destroy a streamix channel\&. 
 .SS "#define SMX_CONNECT(net_id, ch_id, box_name, ch_name, mode)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_connect_ ## mode(\
-            SMX_SIG_PORT_PTR( rts->nets[net_id], box_name, ch_name, mode ),\
-            rts->chs[ch_id], rts->nets[net_id], SMX_MODE_ ## mode,\
-            SMX_SIG_PORT_COUNT( rts->nets[net_id], mode ) )
+    smx_connect_ ## mode(\\
+            SMX_SIG_PORT_PTR( rts\->nets[net_id], box_name, ch_name, mode ),\\
+            rts\->chs[ch_id], rts\->nets[net_id], SMX_MODE_ ## mode,\\
+            SMX_SIG_PORT_COUNT( rts\->nets[net_id], mode ) )
 .fi
 Macro to connect a streamix channel and a net by name mapping\&. 
 .SS "#define SMX_CONNECT_ARR(net_id, ch_id, mode)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_connect_ ## mode( SMX_SIG_PORT_ARR_PTR( rts->nets[net_id], mode ),\
-            rts->chs[ch_id], rts->nets[net_id], SMX_MODE_ ## mode,\
-            SMX_SIG_PORT_COUNT( rts->nets[net_id], mode ) )
+    smx_connect_ ## mode( SMX_SIG_PORT_ARR_PTR( rts\->nets[net_id], mode ),\\
+            rts\->chs[ch_id], rts\->nets[net_id], SMX_MODE_ ## mode,\\
+            SMX_SIG_PORT_COUNT( rts\->nets[net_id], mode ) )
 .fi
 Macro to connect a streamix channel and a net by id mapping\&. 
 .SS "#define SMX_CONNECT_GUARD(id, iats, iatns)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_connect_guard( rts->chs[id],\
-            smx_guard_create( iats, iatns, rts->chs[id] ) )
+    smx_connect_guard( rts\->chs[id],\\
+            smx_guard_create( iats, iatns, rts\->chs[id] ) )
 .fi
 Macro to connect a rate control guard to a streamix channel\&. 
 .SS "#define SMX_CONNECT_OPEN(net_id, box_name, mode)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_connect_open(\
-            SMX_SIG_PORT_COUNT( rts->nets[net_id], SMX_MODE_LOW_ ## mode ),\
-            SMX_ ## mode ## DEGREE_ ## box_name\
+    smx_connect_open(\\
+            SMX_SIG_PORT_COUNT( rts\->nets[net_id], SMX_MODE_LOW_ ## mode ),\\
+            SMX_ ## mode ## DEGREE_ ## box_name\\
     )
 .fi
 Macro to accomodate for open ports\&. 
-.SS "#define SMX_CONNECT_RN(net_id, ch_id)   \fBsmx_connect_rn\fP( rts\->chs[ch_id], rts\->nets[net_id] )"
+.SS "#define SMX_CONNECT_RN(net_id, ch_id)       \fBsmx_connect_rn\fP( rts\->chs[ch_id], rts\->nets[net_id] )"
 Macro to connect a collector to a routing node net\&. 
-.SS "#define SMX_CONNECT_TF(net_id, ch_in_id, ch_out_id, ch_name)   \fBsmx_connect_tf\fP( rts\->nets[net_id], rts\->chs[ch_in_id], rts\->chs[ch_out_id] )"
+.SS "#define SMX_CONNECT_TF(net_id, ch_in_id, ch_out_id, ch_name)       \fBsmx_connect_tf\fP( rts\->nets[net_id], rts\->chs[ch_in_id], rts\->chs[ch_out_id] )"
 Macro to interconnect a temporal firewall with streamix channels\&. 
 .SS "#define SMX_NET_CREATE(id, net_name, box_name, prio)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    rts->nets[id] = smx_net_create( id, #net_name, #box_name,\
+    rts\->nets[id] = smx_net_create( id, #net_name, #box_name,\\
             STRINGIFY( net_ ## net_name ## _ ## id ), rts, prio )
 .fi
 Macro to create a streamix net\&. 
-.SS "#define SMX_NET_DESTROY(id)   \fBsmx_net_destroy\fP( rts\->nets[id] )"
+.SS "#define SMX_NET_DESTROY(id)       \fBsmx_net_destroy\fP( rts\->nets[id] )"
 Macro to destroy a streamix net\&. 
-.SS "#define SMX_NET_DESTROY_RN(id)   \fBsmx_net_destroy_rn\fP( rts\->nets[id] );\\"
+.SS "#define SMX_NET_DESTROY_RN(id)       \fBsmx_net_destroy_rn\fP( rts\->nets[id] );\\"
 Macro to destroy a additional structures created by a routing node\&. 
-.SS "#define SMX_NET_DESTROY_TF(id)   \fBsmx_net_destroy_tf\fP( rts\->nets[id] );\\"
+.SS "#define SMX_NET_DESTROY_TF(id)       \fBsmx_net_destroy_tf\fP( rts\->nets[id] );\\"
 Macro to destroy a additional structures created by a temporal firewall\&. 
-.SS "#define SMX_NET_FINALIZE_TF(net_id)   \fBsmx_net_finalize_tf\fP( rts\->nets[net_id] )"
+.SS "#define SMX_NET_FINALIZE_TF(net_id)       \fBsmx_net_finalize_tf\fP( rts\->nets[net_id] )"
 Macro to interconnect temporal fierwalls with neighbouring nets\&. 
 .SS "#define SMX_NET_INIT(id, indegree, outdegree, box_name)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_net_init( rts->nets[id],\
-            indegree + SMX_INDEGREE_ ## box_name,\
+    smx_net_init( rts\->nets[id],\\
+            indegree + SMX_INDEGREE_ ## box_name,\\
             outdegree + SMX_OUTDEGREE_ ## box_name )
 .fi
 Allocate the necessary space for a net structure\&. 
-.SS "#define SMX_NET_INIT_RN(id)   \fBsmx_net_init_rn\fP( rts\->nets[id] )"
+.SS "#define SMX_NET_INIT_RN(id)       \fBsmx_net_init_rn\fP( rts\->nets[id] )"
 Allocate the necessary space for a routing node structure\&. 
-.SS "#define SMX_NET_INIT_TF(id, sec, nsec)   \fBsmx_net_init_tf\fP( rts\->nets[id], sec, nsec )"
+.SS "#define SMX_NET_INIT_TF(id, sec, nsec)       \fBsmx_net_init_tf\fP( rts\->nets[id], sec, nsec )"
 Allocate the necessary space for a temporal firewall structure\&. 
-.SS "#define SMX_NET_RUN(id, box_name)   \fBsmx_net_run\fP( rts\->ths, id, start_routine_ ## box_name, rts\->nets[id] )"
+.SS "#define SMX_NET_RUN(id, box_name)       \fBsmx_net_run\fP( rts\->ths, id, start_routine_ ## box_name, rts\->nets[id] )"
 Macro to create and execute a thread associated to a net\&. 
-.SS "#define SMX_NET_WAIT_END(id)   \fBsmx_net_wait_end\fP( rts\->ths[id] )"
+.SS "#define SMX_NET_WAIT_END(id)       \fBsmx_net_wait_end\fP( rts\->ths[id] )"
 Macro to wait for all threads to reach this point\&. 
-.SS "#define SMX_PROGRAM_INIT_CLEANUP()   smx_program_init_cleanup( rts )"
+.SS "#define SMX_PROGRAM_INIT_CLEANUP()       smx_program_init_cleanup( rts )"
 Macro to wait for cleanup of all nets to complete before running the post cleanup functions\&. 
-.SS "#define SMX_PROGRAM_INIT_RUN()   \fBsmx_program_init_run\fP( rts )"
+.SS "#define SMX_PROGRAM_INIT_RUN()       \fBsmx_program_init_run\fP( rts )"
 Macro to wait for initialisation of all nets to complete before running the application\&. 
-.SS "#define START_ROUTINE_NET(h, box_name)   \fBsmx_net_start_routine\fP( h, box_name, box_name ## _init, box_name ## _cleanup )"
+.SS "#define START_ROUTINE_NET(h, box_name)       \fBsmx_net_start_routine\fP( h, box_name, box_name ## _init, box_name ## _cleanup )"
 The start routine to be passed to the pthread\&. 
 .SS "#define START_ROUTINE_NET_WITH_SHARED_STATE(h, box_name, key)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_net_start_routine_with_shared_state( h, box_name, box_name ## _init,\
-            box_name ## _cleanup, box_name ## _init_shared,\
+    smx_net_start_routine_with_shared_state( h, box_name, box_name ## _init,\\
+            box_name ## _cleanup, box_name ## _init_shared,\\
             box_name ## _cleanup_shared, key )
 .fi
 The start routine to be passed to the pthread\&. Using shared state 
@@ -266,7 +258,7 @@ Perfrom some cleanup tasks\&. Close the log file
 .RE
 .PP
 
-.SS "smx_rts_t* smx_program_init (const char * app_conf, const char * log_conf, const char ** app_conf_maps, int app_conf_map_count, const char * arg_file, const char * args)"
+.SS "smx_rts_t * smx_program_init (const char * app_conf, const char * log_conf, const char ** app_conf_maps, int app_conf_map_count, const char * arg_file, const char * args)"
 Initialize the rts structure, read the configuration files, and initialize the log\&.
 .PP
 \fBParameters\fP
@@ -362,7 +354,7 @@ Initialize the synchronisation barrier to make sure all nets finish intialisatio
 .RE
 .PP
 
-.SS "const char* smx_rts_get_version ()"
+.SS "const char * smx_rts_get_version ()"
 Get the current version of the library\&.
 .PP
 \fBReturns\fP

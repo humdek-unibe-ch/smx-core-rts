@@ -1,4 +1,4 @@
-.TH "include/smxtypes.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxtypes.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -290,7 +290,7 @@ This structure defines an input key mapping
 .PP
 \fBData Fields:\fP
 .RS 4
-union \fBsmx_config_data_map_s\fP \fIfallback\fP 
+union \fBsmx_config_data_map_s\&.fallback\fP \fIfallback\fP 
 .br
 .PP
 void * \fIh\fP 
@@ -528,13 +528,13 @@ The signature of a net
 .PP
 \fBData Fields:\fP
 .RS 4
-struct \fBsmx_net_sig_s\fP \fIin\fP input channels 
+struct \fBsmx_net_sig_s\&.in\fP \fIin\fP input channels 
 .br
 .PP
-struct \fBsmx_net_sig_s\fP \fIout\fP output channels 
+struct \fBsmx_net_sig_s\&.out\fP \fIout\fP output channels 
 .br
 .PP
-struct \fBsmx_net_sig_s\fP \fIsource\fP internal input channel for sources 
+struct \fBsmx_net_sig_s\&.source\fP \fIsource\fP internal input channel for sources 
 .br
 .PP
 .RE

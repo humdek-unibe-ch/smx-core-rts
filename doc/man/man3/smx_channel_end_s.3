@@ -1,4 +1,4 @@
-.TH "smx_channel_end_t" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "smx_channel_end_t" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -54,13 +54,13 @@ The end of a channel
 .PP 
 .SS "pthread_cond_t smx_channel_end_t::ch_cv"
 conditional variable to trigger producer 
-.SS "bool( * smx_channel_end_t::content_filter) (smx_net_t *\fBnet\fP, smx_msg_t *msg)"
+.SS "bool(* smx_channel_end_t::content_filter) (smx_net_t *\fBnet\fP, smx_msg_t *msg)"
 A pointer to the filter function\&. 
 .SS "unsigned long smx_channel_end_t::count"
 access counter 
 .SS "\fBsmx_channel_err_t\fP smx_channel_end_t::err"
 error on the channel end 
-.SS "struct { \&.\&.\&. }  smx_channel_end_t::filter"
+.SS "struct  { \&.\&.\&. }  smx_channel_end_t::filter"
 All message types allowed on this channel 
 .SS "smx_net_t* smx_channel_end_t::net"
 pointer to the connecting net 
