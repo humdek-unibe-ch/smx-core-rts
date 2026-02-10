@@ -1,4 +1,4 @@
-.TH "include/box_smx_rn.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/box_smx_rn.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -157,7 +157,7 @@ Initialises the routing node\&. The state is allocated with an integer which is 
 .RE
 .PP
 
-.SS "void* start_routine_smx_rn (void * h)"
+.SS "void * start_routine_smx_rn (void * h)"
 This function is predefined and must not be changed\&. It will be passed to the net thread upon creation and will be executed as soon as the thread is started\&. This function calls a macro which is define in the RTS and handles the initialisation, the main loop of the net and the cleanup\&.
 .PP
 \fBParameters\fP

@@ -1,4 +1,4 @@
-.TH "include/smxconfig.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxconfig.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -298,7 +298,7 @@ Initialise the key map target item if it is of type UTF8\&.
 .RE
 .PP
 
-.SS "const char* smx_config_data_map_strerror (int code)"
+.SS "const char * smx_config_data_map_strerror (int code)"
 Return a humanreadable error string, given a an error code\&.
 .PP
 \fBParameters\fP
@@ -399,7 +399,7 @@ Free all maps allocated in a map array
 .RE
 .PP
 
-.SS "smx_config_data_map_t* smx_config_data_maps_get_map_by_key (smx_config_data_maps_t * maps, const char * key)"
+.SS "smx_config_data_map_t * smx_config_data_maps_get_map_by_key (smx_config_data_maps_t * maps, const char * key)"
 Get a map structure given a map key\&.
 .PP
 \fBParameters\fP
@@ -415,7 +415,7 @@ A pointer to the map or NULL on failure\&.
 .RE
 .PP
 
-.SS "bson_t* smx_config_data_maps_get_mapped_payload (smx_config_data_maps_t * maps)"
+.SS "bson_t * smx_config_data_maps_get_mapped_payload (smx_config_data_maps_t * maps)"
 Returns a pointer to the mapped payload\&. Make sure to run \fBsmx_config_data_maps_apply()\fP to update the payload\&.
 .PP
 \fBParameters\fP
@@ -513,9 +513,9 @@ The int value read from the file or 0 if value is not available\&.
 .RE
 .PP
 
-.SS "const char* smx_config_get_string (bson_t * conf, const char * search, unsigned int * len)"
+.SS "const char * smx_config_get_string (bson_t * conf, const char * search, unsigned int * len)"
 This is the same as \fBsmx_config_get_string_err()\fP however without the err output parameter\&. 
-.SS "const char* smx_config_get_string_err (bson_t * conf, const char * search, unsigned int * len, \fBsmx_config_error_t\fP * err)"
+.SS "const char * smx_config_get_string_err (bson_t * conf, const char * search, unsigned int * len, \fBsmx_config_error_t\fP * err)"
 Get a string value from the config file\&.
 .PP
 \fBParameters\fP
@@ -621,7 +621,7 @@ true if the specifier matches the type, false otherwise\&.
 .RE
 .PP
 
-.SS "const char* smx_config_strerror (\fBsmx_config_error_t\fP err)"
+.SS "const char * smx_config_strerror (\fBsmx_config_error_t\fP err)"
 Return a human-readable error message, give an error code\&.
 .PP
 \fBParameters\fP
