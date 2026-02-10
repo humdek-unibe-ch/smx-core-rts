@@ -1,3 +1,12 @@
+libsmxrts1.4 (1.4.9-1) trixie; urgency=medium
+
+  * remove warning log when d_fifo is full
+  * fix log entries for d_fifo
+  * Create documentation files for new release v1.4.9
+  * Create package files for new release v1.4.9
+
+ -- Simon Maurer <simon.maurer@protonmail.ch>  Tue, 10 Feb 2026 10:26:03 +0100
+
 libsmxrts1.4 (1.4.8-1) trixie; urgency=medium
 
   * Create package files for new release v1.4.8
