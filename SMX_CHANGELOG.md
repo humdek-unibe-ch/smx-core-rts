@@ -1,7 +1,16 @@
 # Changelog
 
 -------------------
-## `v1.4.8` (latest)
+## `v1.4.9` (latest)
+
+### Improvement
+- Remove d_fifo full warning when writing to a decoupled channel sink.
+
+### Bug Fixes
+- Fix log entries for d_fifo write operations.
+
+-------------------
+## `v1.4.8`
 
 ### Improvement
 - Add read timeout on uninitialised decoupled channels.
