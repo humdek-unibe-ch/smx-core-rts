@@ -1,4 +1,4 @@
-.TH "include/box_smx_tf.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/box_smx_tf.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -181,7 +181,7 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v\&
 .RE
 .PP
 Temporal firewall box implementation for the runtime system library of Streamix 
-.SS "smx_timer_t* smx_net_create_tf (int sec, int nsec)"
+.SS "smx_timer_t * smx_net_create_tf (int sec, int nsec)"
 
 .PP
 create a periodic timer structure 
@@ -314,7 +314,7 @@ blocking wait on timer Waits on the specified time interval\&. An error message 
 .RE
 .PP
 
-.SS "void* start_routine_smx_tf (void * h)"
+.SS "void * start_routine_smx_tf (void * h)"
 This function is predefined and must not be changed\&. It will be passed to the net thread upon creation and will be executed as soon as the thread is started\&. This function calls a macro which is define in the RTS and handles the initialisation, the main loop of the net and the cleanup\&.
 .PP
 \fBParameters\fP

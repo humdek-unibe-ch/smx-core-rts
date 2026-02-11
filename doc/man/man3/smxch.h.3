@@ -1,4 +1,4 @@
-.TH "include/smxch.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxch.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -16,28 +16,28 @@ include/smxch.h
 .RI "#define \fBSMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK\fP(h,  box_name,  ch_name)"
 .br
 .ti -1c
-.RI "#define \fBSMX_CHANNEL_SET_BACKUP\fP(h,  box_name,  ch_name,  msg)   \fBsmx_channel_set_backup\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), msg )"
+.RI "#define \fBSMX_CHANNEL_SET_BACKUP\fP(h,  box_name,  ch_name,  msg)       \fBsmx_channel_set_backup\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), msg )"
 .br
 .ti -1c
-.RI "#define \fBSMX_CHANNEL_READ\fP(h,  box_name,  ch_name)   \fBsmx_channel_read\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
+.RI "#define \fBSMX_CHANNEL_READ\fP(h,  box_name,  ch_name)       \fBsmx_channel_read\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
 .br
 .ti -1c
-.RI "#define \fBSMX_CHANNEL_WRITE\fP(h,  box_name,  ch_name,  data)   \fBsmx_channel_write\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), data )"
+.RI "#define \fBSMX_CHANNEL_WRITE\fP(h,  box_name,  ch_name,  data)       \fBsmx_channel_write\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), data )"
 .br
 .ti -1c
-.RI "#define \fBSMX_GET_READ_ERROR\fP(h,  box_name,  ch_name)   \fBsmx_get_read_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
+.RI "#define \fBSMX_GET_READ_ERROR\fP(h,  box_name,  ch_name)       \fBsmx_get_read_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
 .br
 .ti -1c
 .RI "#define \fBSMX_HAS_READ_TIMEOUT\fP(h,  box_name,  ch_name)"
 .br
 .ti -1c
-.RI "#define \fBSMX_GET_WRITE_ERROR\fP(h,  box_name,  ch_name)   \fBsmx_get_write_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ) )"
+.RI "#define \fBSMX_GET_WRITE_ERROR\fP(h,  box_name,  ch_name)       \fBsmx_get_write_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ) )"
 .br
 .ti -1c
-.RI "#define \fBSMX_SET_READ_TIMEOUT\fP(h,  box_name,  ch_name,  sec,  nsec)   \fBsmx_set_read_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), sec, nsec )"
+.RI "#define \fBSMX_SET_READ_TIMEOUT\fP(h,  box_name,  ch_name,  sec,  nsec)       \fBsmx_set_read_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), sec, nsec )"
 .br
 .ti -1c
-.RI "#define \fBSMX_SET_WRITE_TIMEOUT\fP(h,  box_name,  ch_name,  sec,  nsec)   \fBsmx_set_write_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), sec, nsec )"
+.RI "#define \fBSMX_SET_WRITE_TIMEOUT\fP(h,  box_name,  ch_name,  sec,  nsec)       \fBsmx_set_write_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), sec, nsec )"
 .br
 .ti -1c
 .RI "#define \fBSMX_CHANNEL_SET_CONTENT_FILTER\fP(h,  box_name,  ch_name,  filter)"
@@ -224,10 +224,9 @@ Channel and FIFO definitions for the runtime system library of Streamix
 .SH "Macro Definition Documentation"
 .PP 
 .SS "#define SMX_CHANNEL_ACTIVATE_DECOUPLED_READ_BLOCK(h, box_name, ch_name)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_channel_activate_decoupled_read_block(\
+    smx_channel_activate_decoupled_read_block(\\
             SMX_SIG_PORT( h, box_name, ch_name, in ) )
 .fi
 Activate the blocking read behaviour for the next read operation from a decoupled input port\&.
@@ -242,7 +241,7 @@ Activate the blocking read behaviour for the next read operation from a decouple
 .RE
 .PP
 
-.SS "#define SMX_CHANNEL_READ(h, box_name, ch_name)   \fBsmx_channel_read\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
+.SS "#define SMX_CHANNEL_READ(h, box_name, ch_name)       \fBsmx_channel_read\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
 Read from a streamix channel by accessing a net input port\&.
 .PP
 \fBParameters\fP
@@ -260,7 +259,7 @@ A pointer to a message type ::smx_msg_t or NULL if something went wrong\&. Use t
 .RE
 .PP
 
-.SS "#define SMX_CHANNEL_SET_BACKUP(h, box_name, ch_name, msg)   \fBsmx_channel_set_backup\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), msg )"
+.SS "#define SMX_CHANNEL_SET_BACKUP(h, box_name, ch_name, msg)       \fBsmx_channel_set_backup\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), msg )"
 Store a backup message to a channel\&. This can be used to ansure that ar decoupled input port always provides a valid message\&.
 .PP
 \fBParameters\fP
@@ -281,10 +280,9 @@ Store a backup message to a channel\&. This can be used to ansure that ar decoup
 .PP
 
 .SS "#define SMX_CHANNEL_SET_CONTENT_FILTER(h, box_name, ch_name, filter)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_channel_set_content_filter( SMX_SIG_PORT( h, box_name, ch_name, in ),\
+    smx_channel_set_content_filter( SMX_SIG_PORT( h, box_name, ch_name, in ),\\
             filter )
 .fi
 Set a message content filter on a channel\&. The filter is a function that operates on the message content\&. The function receives the message as parameter and must return either true if the filter passes or false if the filter fails\&.
@@ -309,10 +307,9 @@ true on success or false on failure\&.
 .PP
 
 .SS "#define SMX_CHANNEL_SET_TYPE_FILTER(h, box_name, ch_name, count,  \&.\&.\&.)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_channel_set_filter( h, SMX_SIG_PORT( h, box_name, ch_name, in ),\
+    smx_channel_set_filter( h, SMX_SIG_PORT( h, box_name, ch_name, in ),\\
             count, ##__VA_ARGS__ )
 .fi
 Set a message type filter on a channel filter\&. A channel filter allows to whitelist message types\&. If the filter is set, only messages of the specified types are allowed to be written to a channel\&. One filter is an arbitrary string or NULL to allow messages with undefined message type\&. If a message type does not match any whitelisted types, an error is logged and the message is dismissed\&.
@@ -338,7 +335,7 @@ true on success or false on failure\&.
 .RE
 .PP
 
-.SS "#define SMX_CHANNEL_WRITE(h, box_name, ch_name, data)   \fBsmx_channel_write\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), data )"
+.SS "#define SMX_CHANNEL_WRITE(h, box_name, ch_name, data)       \fBsmx_channel_write\fP( h, \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ), data )"
 Write to a streamix channel by accessing a net output port\&.
 .PP
 \fBParameters\fP
@@ -358,7 +355,7 @@ Write to a streamix channel by accessing a net output port\&.
 .RE
 .PP
 
-.SS "#define SMX_GET_READ_ERROR(h, box_name, ch_name)   \fBsmx_get_read_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
+.SS "#define SMX_GET_READ_ERROR(h, box_name, ch_name)       \fBsmx_get_read_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ) )"
 Get the error code of a channel read operation\&. Use this macro if \fBSMX_CHANNEL_READ()\fP failed\&.
 .PP
 \fBParameters\fP
@@ -376,7 +373,7 @@ The error code of the operation\&. Refer to \fBsmx_channel_err_e\fP for a descri
 .RE
 .PP
 
-.SS "#define SMX_GET_WRITE_ERROR(h, box_name, ch_name)   \fBsmx_get_write_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ) )"
+.SS "#define SMX_GET_WRITE_ERROR(h, box_name, ch_name)       \fBsmx_get_write_error\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, out ) )"
 Get the error code of a channel write operation\&. Use this macro if \fBSMX_CHANNEL_WRITE()\fP failed\&.
 .PP
 \fBParameters\fP
@@ -395,10 +392,9 @@ The error code of the operation\&. Refer to \fBsmx_channel_err_e\fP for a descri
 .PP
 
 .SS "#define SMX_HAS_READ_TIMEOUT(h, box_name, ch_name)"
-\fBValue:\fP
-.PP
+\fBValue:\fP.PP
 .nf
-    smx_get_read_error( SMX_SIG_PORT( h, box_name, ch_name, in ) ) \
+    smx_get_read_error( SMX_SIG_PORT( h, box_name, ch_name, in ) ) \\
         == SMX_CHANNEL_ERR_TIMEOUT
 .fi
 Check if the channel has a read timeout\&. Use this macro if \fBSMX_CHANNEL_READ()\fP failed\&.
@@ -418,7 +414,7 @@ True if a read timeout error is set, false otherwse\&.
 .RE
 .PP
 
-.SS "#define SMX_SET_READ_TIMEOUT(h, box_name, ch_name, sec, nsec)   \fBsmx_set_read_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), sec, nsec )"
+.SS "#define SMX_SET_READ_TIMEOUT(h, box_name, ch_name, sec, nsec)       \fBsmx_set_read_timeout\fP( \fBSMX_SIG_PORT\fP( h, box_name, ch_name, in ), sec, nsec )"
 Set a timeout on the channel source
 .PP
 \fBParameters\fP
@@ -477,7 +473,7 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v\&
 .RE
 .PP
 Channel and FIFO definitions for the runtime system library of Streamix 
-.SS "smx_msg_t* smx_channel_await_and_read (void * h, smx_channel_t * ch)"
+.SS "smx_msg_t * smx_channel_await_and_read (void * h, smx_channel_t * ch)"
 Read data from the channel\&. The function blocks as long as no data is available in the channel\&. See \fBsmx_channel_await()\fP for more information\&.
 .PP
 \fBParameters\fP
@@ -526,7 +522,7 @@ Change the write state of a channel\&. The state is only changed if the current 
 .RE
 .PP
 
-.SS "smx_channel_t* smx_channel_create (int * ch_cnt, int len, \fBsmx_channel_type_t\fP type, int id, const char * name, const char * cat_name)"
+.SS "smx_channel_t * smx_channel_create (int * ch_cnt, int len, \fBsmx_channel_type_t\fP type, int id, const char * name, const char * cat_name)"
 
 .PP
 Create Streamix channel\&. 
@@ -552,7 +548,7 @@ a pointer to the created channel or NULL
 .RE
 .PP
 
-.SS "smx_channel_end_t* smx_channel_create_end ()"
+.SS "smx_channel_end_t * smx_channel_create_end ()"
 Create a channel end\&.
 .PP
 \fBReturns\fP
@@ -583,7 +579,7 @@ Destroy Streamix channel end structure\&.
 .RE
 .PP
 
-.SS "smx_msg_t* smx_channel_read (void * h, smx_channel_t * ch)"
+.SS "smx_msg_t * smx_channel_read (void * h, smx_channel_t * ch)"
 
 .PP
 Read the data from an input port\&. Allows to access the channel and read data\&. The channel is protected by mutual exclusion\&. The macro \fBSMX_CHANNEL_READ()\fP provides a convenient interface to access the ports by name\&. Note that this function will not wait a message but return immediately if no data is available\&. For blocking behaviour use \fBsmx_channel_await_and_read()\fP instead\&.
@@ -683,7 +679,7 @@ true on success or false on failure\&.
 .RE
 .PP
 
-.SS "const char* smx_channel_strerror (\fBsmx_channel_err_t\fP err)"
+.SS "const char * smx_channel_strerror (\fBsmx_channel_err_t\fP err)"
 Return a human-readable error message, give an error code\&.
 .PP
 \fBParameters\fP
@@ -735,7 +731,7 @@ Write data to an output port\&. Allows to access the channel and write data\&. T
 .RE
 .PP
 
-.SS "smx_collector_t* smx_collector_create ()"
+.SS "smx_collector_t * smx_collector_create ()"
 Create a collector structure and initialize it\&.
 .PP
 \fBReturns\fP
@@ -879,7 +875,7 @@ imposes a rate-control on decoupled write operations A message is discarded if i
 .RE
 .PP
 
-.SS "smx_fifo_t* smx_fifo_create (int length)"
+.SS "smx_fifo_t * smx_fifo_create (int length)"
 
 .PP
 Create Streamix FIFO channel\&. 
@@ -895,7 +891,7 @@ pointer to the created FIFO
 .RE
 .PP
 
-.SS "smx_msg_t* smx_fifo_d_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
+.SS "smx_msg_t * smx_fifo_d_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
 
 .PP
 read from a Streamix FIFO_D channel Read from a channel that is decoupled at the output (the consumer is decoupled at the input)\&. This means that the msg at the head of the FIFO_D will potentially be duplicated\&.
@@ -915,7 +911,7 @@ pointer to a message structure
 .RE
 .PP
 
-.SS "smx_msg_t* smx_fifo_dd_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
+.SS "smx_msg_t * smx_fifo_dd_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
 
 .PP
 read from a Streamix FIFO_DD channel Read from a channel that is decoupled at the output and connected to a temporal firewall\&. The read is non-blocking but no duplication of messages is done\&. If no message is available NULL is returned\&.
@@ -946,7 +942,7 @@ Destroy Streamix FIFO channel structure\&.
 .RE
 .PP
 
-.SS "smx_msg_t* smx_fifo_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
+.SS "smx_msg_t * smx_fifo_read (void * h, smx_channel_t * ch, smx_fifo_t * fifo)"
 
 .PP
 read from a Streamix FIFO channel 
@@ -988,7 +984,7 @@ write to a Streamix FIFO channel
 .RE
 .PP
 
-.SS "smx_channel_t* smx_get_channel_by_name (smx_channel_t ** ports, int count, const char * name)"
+.SS "smx_channel_t * smx_get_channel_by_name (smx_channel_t ** ports, int count, const char * name)"
 Given a port name return a pointer to the port\&.
 .PP
 \fBParameters\fP
@@ -1034,7 +1030,7 @@ The error value indicationg the problem
 .RE
 .PP
 
-.SS "smx_guard_t* smx_guard_create (int iats, int iatns, smx_channel_t * ch)"
+.SS "smx_guard_t * smx_guard_create (int iats, int iatns, smx_channel_t * ch)"
 
 .PP
 create timed guard structure and initialise timer 

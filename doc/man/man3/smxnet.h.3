@@ -1,4 +1,4 @@
-.TH "include/smxnet.h" 3 "Wed Nov 12 2025" "Version v1.4.8" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxnet.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -22,37 +22,37 @@ include/smxnet.h
 .RI "#define \fBSMXNET_H\fP"
 .br
 .ti -1c
-.RI "#define \fBSMX_LOG\fP(h,  level,  format, \&.\&.\&.)   \fBSMX_LOG_NET\fP( h, level, format, ##__VA_ARGS__ )"
+.RI "#define \fBSMX_LOG\fP(h,  level,  format, \&.\&.\&.)       \fBSMX_LOG_NET\fP( h, level, format, ##__VA_ARGS__ )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_CONF\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->conf )"
+.RI "#define \fBSMX_NET_GET_CONF\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->conf )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_ARGUMENTS\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->rts\->args )"
+.RI "#define \fBSMX_NET_GET_ARGUMENTS\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->rts\->args )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_COUNT\fP(h)   ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->count )"
+.RI "#define \fBSMX_NET_GET_COUNT\fP(h)       ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->count )"
 .br
 .ti -1c
 .RI "#define \fBSMX_NET_GET_ID\fP(h)   ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->id )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_NAME\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->name )"
+.RI "#define \fBSMX_NET_GET_NAME\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->name )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_IMPL\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->impl )"
+.RI "#define \fBSMX_NET_GET_IMPL\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->impl )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_PRIO\fP(h)   ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->priority )"
+.RI "#define \fBSMX_NET_GET_PRIO\fP(h)       ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->priority )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_STATE\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->state )"
+.RI "#define \fBSMX_NET_GET_STATE\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->state )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_GET_SHARED_STATE\fP(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->shared_state )"
+.RI "#define \fBSMX_NET_GET_SHARED_STATE\fP(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->shared_state )"
 .br
 .ti -1c
-.RI "#define \fBSMX_NET_IS_FIRST_RUN\fP(h)   ( ( h == NULL ) ? 0 : ( ( ( smx_net_t* )h )\->count == 1 ? 1 : 0 ) )"
+.RI "#define \fBSMX_NET_IS_FIRST_RUN\fP(h)       ( ( h == NULL ) ? 0 : ( ( ( smx_net_t* )h )\->count == 1 ? 1 : 0 ) )"
 .br
 .in -1c
 .SS "Functions"
@@ -146,7 +146,7 @@ This Source Code Form is subject to the terms of the Mozilla Public License, v\&
 Net definitions for the runtime system library of Streamix 
 .SH "Macro Definition Documentation"
 .PP 
-.SS "#define SMX_LOG(h, level, format,  \&.\&.\&.)   \fBSMX_LOG_NET\fP( h, level, format, ##__VA_ARGS__ )"
+.SS "#define SMX_LOG(h, level, format,  \&.\&.\&.)       \fBSMX_LOG_NET\fP( h, level, format, ##__VA_ARGS__ )"
 This macro allows to log events to the log file\&.
 .PP
 \fBParameters\fP
@@ -174,7 +174,7 @@ This macro allows to log events to the log file\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_ARGUMENTS(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->rts\->args )"
+.SS "#define SMX_NET_GET_ARGUMENTS(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->rts\->args )"
 Get the net argument structure\&.
 .PP
 \fBParameters\fP
@@ -188,7 +188,7 @@ The argument structure of type \fCbson_t*\fP or NULL\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_CONF(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->conf )"
+.SS "#define SMX_NET_GET_CONF(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->conf )"
 Get the net configuration structure\&.
 .PP
 \fBParameters\fP
@@ -202,7 +202,7 @@ The net configuration structure of type \fCbson_t*\fP or NULL\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_COUNT(h)   ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->count )"
+.SS "#define SMX_NET_GET_COUNT(h)       ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->count )"
 Get the current net loop count\&.
 .PP
 \fBParameters\fP
@@ -230,7 +230,7 @@ The net id of type \fCunsigned int\fP\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_IMPL(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->impl )"
+.SS "#define SMX_NET_GET_IMPL(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->impl )"
 Get the box implementation name\&.
 .PP
 \fBParameters\fP
@@ -244,7 +244,7 @@ A pointer to the box implementation name of type \fCconst char*\fP\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_NAME(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->name )"
+.SS "#define SMX_NET_GET_NAME(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->name )"
 Get the net name\&.
 .PP
 \fBParameters\fP
@@ -258,7 +258,7 @@ A pointer to the net name of type \fCconst char*\fP\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_PRIO(h)   ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->priority )"
+.SS "#define SMX_NET_GET_PRIO(h)       ( ( h == NULL ) ? \-1 : ( ( smx_net_t* )h )\->priority )"
 Get the net thread priority\&.
 .PP
 \fBParameters\fP
@@ -272,7 +272,7 @@ The net thread priority or -1 on failure\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_SHARED_STATE(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->shared_state )"
+.SS "#define SMX_NET_GET_SHARED_STATE(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->shared_state )"
 Get the allocated shared state of the net instance\&.
 .PP
 \fBParameters\fP
@@ -286,7 +286,7 @@ A pointer to the shared state or NULL\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_GET_STATE(h)   ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->state )"
+.SS "#define SMX_NET_GET_STATE(h)       ( ( h == NULL ) ? NULL : ( ( smx_net_t* )h )\->state )"
 Get the allocated state of the net instance\&.
 .PP
 \fBParameters\fP
@@ -300,7 +300,7 @@ A pointer to the state or NULL\&.
 .RE
 .PP
 
-.SS "#define SMX_NET_IS_FIRST_RUN(h)   ( ( h == NULL ) ? 0 : ( ( ( smx_net_t* )h )\->count == 1 ? 1 : 0 ) )"
+.SS "#define SMX_NET_IS_FIRST_RUN(h)       ( ( h == NULL ) ? 0 : ( ( ( smx_net_t* )h )\->count == 1 ? 1 : 0 ) )"
 Check if the current net run is the first run\&.
 .PP
 \fBParameters\fP
@@ -316,7 +316,7 @@ Check if the current net run is the first run\&.
 
 .SH "Function Documentation"
 .PP 
-.SS "smx_msg_t* smx_net_collector_read (void * h, smx_collector_t * collector, smx_channel_t ** in, int count_in, int * last_idx)"
+.SS "smx_msg_t * smx_net_collector_read (void * h, smx_collector_t * collector, smx_channel_t ** in, int count_in, int * last_idx)"
 Read from a collector of a net\&.
 .PP
 \fBParameters\fP
@@ -338,7 +338,7 @@ the message that was read or NULL if no message was read
 .RE
 .PP
 
-.SS "smx_net_t* smx_net_create (unsigned int id, const char * name, const char * impl, const char * cat_name, smx_rts_t * rts, int prio)"
+.SS "smx_net_t * smx_net_create (unsigned int id, const char * name, const char * impl, const char * cat_name, smx_rts_t * rts, int prio)"
 Create a new net instance\&. This includes
 .IP "\(bu" 2
 creating a zlog category
@@ -501,7 +501,7 @@ Get the json configuration for a given search string\&.
 .RE
 .PP
 
-.SS "const char* smx_net_get_string_prop (bson_t * conf, const char * name, const char * impl, unsigned int id, const char * prop)"
+.SS "const char * smx_net_get_string_prop (bson_t * conf, const char * name, const char * impl, unsigned int id, const char * prop)"
 Get a string property configuration setting for the current net\&.
 .PP
 The function hiearchically searches for a confic that is specific for
@@ -632,7 +632,7 @@ Connect the source channel to the net\&.
 .RE
 .PP
 
-.SS "smx_msg_t* smx_net_source_read (smx_net_t * net, int idx)"
+.SS "smx_msg_t * smx_net_source_read (smx_net_t * net, int idx)"
 Read from the source queue of the net\&.
 .PP
 \fBParameters\fP
@@ -682,7 +682,7 @@ Write to the source queue of the net\&.
 .RE
 .PP
 
-.SS "void* smx_net_start_routine (smx_net_t * h, int  implvoid *, void *, int  initvoid *, void **, void  cleanupvoid *, void *)"
+.SS "void * smx_net_start_routine (smx_net_t * h, int  implvoid *, void *, int  initvoid *, void **, void  cleanupvoid *, void *)"
 
 .PP
 the start routine of a thread associated to a box 
@@ -704,7 +704,7 @@ returns NULL
 .RE
 .PP
 
-.SS "void* smx_net_start_routine_with_shared_state (smx_net_t * h, int  implvoid *, void *, int  initvoid *, void **, void  cleanupvoid *, void *, int  init_sharedvoid *, void **, void  cleanup_sharedvoid *, const char * shared_state_key)"
+.SS "void * smx_net_start_routine_with_shared_state (smx_net_t * h, int  implvoid *, void *, int  initvoid *, void **, void  cleanupvoid *, void *, int  init_sharedvoid *, void **, void  cleanup_sharedvoid *, const char * shared_state_key)"
 The same as \fBsmx_net_start_routine()\fP but this includes handlers to initialize and cleanup shared state\&.
 .PP
 \fBParameters\fP
