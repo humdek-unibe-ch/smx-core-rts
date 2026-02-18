@@ -1,4 +1,4 @@
-.TH "include/smxtypes.h" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxtypes.h" 3 "Version v1.4.10" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -290,6 +290,15 @@ This structure defines an input key mapping
 .PP
 \fBData Fields:\fP
 .RS 4
+union \fBsmx_config_data_map_s\fP \fIfallback\fP 
+.br
+.PP
+union \fBsmx_config_data_map_s\fP \fIfallback\fP 
+.br
+.PP
+union \fBsmx_config_data_map_s\fP \fIfallback\fP 
+.br
+.PP
 union \fBsmx_config_data_map_s\&.fallback\fP \fIfallback\fP 
 .br
 .PP
@@ -528,10 +537,37 @@ The signature of a net
 .PP
 \fBData Fields:\fP
 .RS 4
+struct \fBsmx_net_sig_s\fP \fIin\fP input channels 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIin\fP input channels 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIin\fP input channels 
+.br
+.PP
 struct \fBsmx_net_sig_s\&.in\fP \fIin\fP input channels 
 .br
 .PP
+struct \fBsmx_net_sig_s\fP \fIout\fP output channels 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIout\fP output channels 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIout\fP output channels 
+.br
+.PP
 struct \fBsmx_net_sig_s\&.out\fP \fIout\fP output channels 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIsource\fP internal input channel for sources 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIsource\fP internal input channel for sources 
+.br
+.PP
+struct \fBsmx_net_sig_s\fP \fIsource\fP internal input channel for sources 
 .br
 .PP
 struct \fBsmx_net_sig_s\&.source\fP \fIsource\fP internal input channel for sources 
@@ -598,6 +634,24 @@ pthread_t \fIths[\fBSMX_MAX_NETS\fP]\fP the array holding all thread ids
 int \fIcount\fP 
 .br
 .PP
+int \fIcount\fP 
+.br
+.PP
+int \fIcount\fP 
+.br
+.PP
+int \fIcount\fP 
+.br
+.PP
+char ** \fIitems\fP 
+.br
+.PP
+char ** \fIitems\fP 
+.br
+.PP
+char ** \fIitems\fP 
+.br
+.PP
 char ** \fIitems\fP 
 .br
 .PP
@@ -610,10 +664,70 @@ char ** \fIitems\fP
 bool \fIv_bool\fP 
 .br
 .PP
+bool \fIv_bool\fP 
+.br
+.PP
+bool \fIv_bool\fP 
+.br
+.PP
+bool \fIv_bool\fP 
+.br
+.PP
+bool \fIv_bool\fP 
+.br
+.PP
+bool \fIv_bool\fP 
+.br
+.PP
+double \fIv_double\fP 
+.br
+.PP
+double \fIv_double\fP 
+.br
+.PP
+double \fIv_double\fP 
+.br
+.PP
+double \fIv_double\fP 
+.br
+.PP
+double \fIv_double\fP 
+.br
+.PP
 double \fIv_double\fP 
 .br
 .PP
 int32_t \fIv_int32\fP 
+.br
+.PP
+int32_t \fIv_int32\fP 
+.br
+.PP
+int32_t \fIv_int32\fP 
+.br
+.PP
+int32_t \fIv_int32\fP 
+.br
+.PP
+int32_t \fIv_int32\fP 
+.br
+.PP
+int32_t \fIv_int32\fP 
+.br
+.PP
+int64_t \fIv_int64\fP 
+.br
+.PP
+int64_t \fIv_int64\fP 
+.br
+.PP
+int64_t \fIv_int64\fP 
+.br
+.PP
+int64_t \fIv_int64\fP 
+.br
+.PP
+int64_t \fIv_int64\fP 
 .br
 .PP
 int64_t \fIv_int64\fP 
@@ -628,7 +742,34 @@ int64_t \fIv_int64\fP
 int \fIcount\fP the number of connected input ports 
 .br
 .PP
+int \fIcount\fP the number of connected input ports 
+.br
+.PP
+int \fIcount\fP the number of connected input ports 
+.br
+.PP
+int \fIcount\fP the number of connected input ports 
+.br
+.PP
 int \fIlen\fP the number of input ports 
+.br
+.PP
+int \fIlen\fP the number of input ports 
+.br
+.PP
+int \fIlen\fP the number of input ports 
+.br
+.PP
+int \fIlen\fP the number of input ports 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
 .br
 .PP
 smx_channel_t ** \fIports\fP an array of channel pointers 
@@ -643,7 +784,34 @@ smx_channel_t ** \fIports\fP an array of channel pointers
 int \fIcount\fP the number of connected output ports 
 .br
 .PP
+int \fIcount\fP the number of connected output ports 
+.br
+.PP
+int \fIcount\fP the number of connected output ports 
+.br
+.PP
+int \fIcount\fP the number of connected output ports 
+.br
+.PP
 int \fIlen\fP the number of output ports 
+.br
+.PP
+int \fIlen\fP the number of output ports 
+.br
+.PP
+int \fIlen\fP the number of output ports 
+.br
+.PP
+int \fIlen\fP the number of output ports 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
+.br
+.PP
+smx_channel_t ** \fIports\fP an array of channel pointers 
 .br
 .PP
 smx_channel_t ** \fIports\fP an array of channel pointers 
@@ -656,6 +824,24 @@ smx_channel_t ** \fIports\fP an array of channel pointers
 \fBData Fields:\fP
 .RS 4
 int \fIcount\fP the number of connected source ports 
+.br
+.PP
+int \fIcount\fP the number of connected source ports 
+.br
+.PP
+int \fIcount\fP the number of connected source ports 
+.br
+.PP
+int \fIcount\fP the number of connected source ports 
+.br
+.PP
+smx_net_source_t \fIitems[\fBSMX_MAX_SOURCE_CHS\fP]\fP an array of source channel structures 
+.br
+.PP
+smx_net_source_t \fIitems[\fBSMX_MAX_SOURCE_CHS\fP]\fP an array of source channel structures 
+.br
+.PP
+smx_net_source_t \fIitems[\fBSMX_MAX_SOURCE_CHS\fP]\fP an array of source channel structures 
 .br
 .PP
 smx_net_source_t \fIitems[\fBSMX_MAX_SOURCE_CHS\fP]\fP an array of source channel structures 

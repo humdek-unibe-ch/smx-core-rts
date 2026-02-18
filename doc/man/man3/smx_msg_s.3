@@ -1,4 +1,4 @@
-.TH "smx_msg_t" 3 "Version v1.4.9" "libsmxrts" \" -*- nroff -*-
+.TH "smx_msg_t" 3 "Version v1.4.10" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -46,11 +46,11 @@ The structure contains handlers that can be used to manipulate data\&. These han
 The streamix message type\&. Refer to the structure definition for more information \fBsmx_msg_s\fP\&. 
 .SH "Field Documentation"
 .PP 
-.SS "void *(* smx_msg_t::copy) (void *, size_t)"
+.SS "void *(* smx_msg_t::copy)(void *, size_t)"
 pointer to a fct making a deep copy 
-.SS "void* smx_msg_t::data"
+.SS "void * smx_msg_t::data"
 pointer to the data 
-.SS "void(* smx_msg_t::destroy) (void *)"
+.SS "void(* smx_msg_t::destroy)(void *)"
 pointer to a fct that frees data 
 .SS "unsigned long long smx_msg_t::id"
 the unique message id 
@@ -58,9 +58,9 @@ the unique message id
 prevents msg backups from being created 
 .SS "int smx_msg_t::size"
 size of the data 
-.SS "char* smx_msg_t::type"
+.SS "char * smx_msg_t::type"
 an optional string indicating the msg data type 
-.SS "void *(* smx_msg_t::unpack) (void *)"
+.SS "void *(* smx_msg_t::unpack)(void *)"
 pointer to a fct that unpacks data 
 
 .SH "Author"
