@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.9` (latest)
+## `v1.4.10` (latest)
+
+### Changes
+- Bump to avoid multi-distro issues.
+
+-------------------
+## `v1.4.9`
 
 ### Improvement
 - Remove d_fifo full warning when writing to a decoupled channel sink.
