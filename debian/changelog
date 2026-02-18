@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.10-1) trixie; urgency=medium
+
+  * add gitignore
+  * bump for multi-distro compatibility
+  * Create documentation files for new release v1.4.10
+
+ -- Simon Maurer <simon.maurer@protonmail.ch>  Wed, 18 Feb 2026 09:40:23 +0100
+
 libsmxrts1.4 (1.4.9-1) trixie; urgency=medium
 
   * remove warning log when d_fifo is full
@@ -13,7 +21,7 @@ libsmxrts1.4 (1.4.8-1) trixie; urgency=medium
 
  -- Simon Maurer <simon.maurer@unibe.ch>  Tue, 20 Jan 2026 09:44:23 +0000
 
-libsmxrts1.4 (1.4.8-1) trixie; urgency=medium
+libsmxrts1.4 (1.4.0-1) trixie; urgency=medium
 
   * Initial release
 
