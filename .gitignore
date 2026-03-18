@@ -33,4 +33,5 @@
 *.dSYM/
 
 dpkg
+dpkg-test
 .ycm_extra_conf.py
