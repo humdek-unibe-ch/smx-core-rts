@@ -1,3 +1,11 @@
+libsmxrts1.4 (1.4.10-1) noble; urgency=medium
+
+  * add gitignore
+  * bump for multi-distro compatibility
+  * Create documentation files for new release v1.4.10
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Wed, 18 Mar 2026 11:20:00 +0000
+
 libsmxrts1.4 (1.4.9-1) noble; urgency=medium
 
   * UNRELEASED
