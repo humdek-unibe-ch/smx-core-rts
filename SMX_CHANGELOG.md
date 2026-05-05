@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.4.10` (latest)
+## `v1.5.0` (latest)
+
+### Improvement
+- Improve licensing annotations.
+
+-------------------
+## `v1.4.10`
 
 ### Changes
 - Bump to avoid multi-distro issues.

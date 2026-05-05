@@ -52,3 +52,9 @@ sudo make install
 
 Look for repositories with the name prefix `smx-app-` for Streamix applications which were built with this runtime system.
 Try [this link](https://github.com/search?q=topic%3Astreamix-app+org%3Ahumdek-unibe-ch+fork%3Atrue&type=repositories) for a list of available Streamix apps.
+
+## Copyright and Licensing
+
+- The project source code is licensed under MPL-2.0.
+- Debian packaging files (`debian/`, present only in packaging/build branches such as `debian`) are licensed under GPL-2+.
+- Users of this project should consider only the MPL-2.0 license unless they are working with Debian packaging artifacts.

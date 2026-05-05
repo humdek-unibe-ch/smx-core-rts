@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MPL-2.0
+
 ###############################################################################
 # CUTOMIZE THIS FILE TO SUIT YOUR NEEDS FOR THE BUILD PROCESS                 #
 # This file is included into the following files (refer to them for more      #
@@ -7,12 +9,12 @@
 
 # The version number of the box library ($(VMAJ).$(VMIN).$(VREV))
 VMAJ = 1
-VMIN = 4
-VREV = 10
+VMIN = 5
+VREV = 0
 VDEB = 1
 
 # the RTS library
-SMX_LIBS = smxzlog-1.1 smxurcu-0.1 smxlttngust-0.2
+SMX_LIBS = smxzlog-1.2 smxurcu-1.0 smxlttngust-1.0
 
 # the name of the library
 LIBNAME = smxrts

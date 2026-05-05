@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MPL-2.0
+
 SHELL := /bin/bash
 
 include config.mk
