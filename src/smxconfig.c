@@ -8,6 +8,7 @@
 
 #include <stdarg.h>
 #include "smxconfig.h"
+#include "bson/bson.h"
 #include "smxutils.h"
 #include "smxlog.h"
 
@@ -291,7 +292,10 @@ int smx_config_data_maps_init( bson_iter_t* i_fields, bson_t* data,
             {
                 return rc;
             }
-            maps->count++;
+            else if( rc == 0 ) // do not increment if disabled
+            {
+                maps->count++;
+            }
         }
         else
         {
@@ -699,6 +703,13 @@ int smx_config_data_map_init( bson_t* payload,
     while( bson_iter_next( i_map ) )
     {
         key = bson_iter_key( i_map );
+        if( strcmp( key, "disabled" ) == 0 )
+        {
+            if( BSON_ITER_HOLDS_BOOL( i_map ) && bson_iter_bool( i_map ) )
+            {
+                return 1;
+            }
+        }
         if( strcmp( key, "tgt" ) == 0 )
         {
             if( BSON_ITER_HOLDS_UTF8( i_map ) )
