@@ -287,6 +287,7 @@ doc/man/man3/smx_net_init_tf.3
 doc/man/man3/smx_net_report_rate_warning.3
 doc/man/man3/smx_net_run.3
 doc/man/man3/smx_net_source_add.3
+doc/man/man3/smx_net_source_ch.3
 doc/man/man3/smx_net_source_disable.3
 doc/man/man3/smx_net_source_enable.3
 doc/man/man3/smx_net_source_read.3
