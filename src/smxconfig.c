@@ -283,6 +283,20 @@ int smx_config_data_maps_init( bson_iter_t* i_fields, bson_t* data,
         {
             return SMX_CONFIG_MAP_ERROR_MAP_COUNT_EXCEEDED;
         }
+
+        // check if map item is disabled
+        if( BSON_ITER_HOLDS_DOCUMENT( i_fields )
+                && bson_iter_recurse( i_fields, &i_field )
+                && bson_iter_find( &i_field, "disabled" ) )
+        {
+            if( BSON_ITER_HOLDS_BOOL( &i_field )
+                    && bson_iter_bool( &i_field ) )
+            {
+                continue;
+            }
+        }
+
+        // initialise map item
         if( BSON_ITER_HOLDS_DOCUMENT( i_fields )
                 && bson_iter_recurse( i_fields, &i_field ) )
         {
@@ -703,13 +717,6 @@ int smx_config_data_map_init( bson_t* payload,
     while( bson_iter_next( i_map ) )
     {
         key = bson_iter_key( i_map );
-        if( strcmp( key, "disabled" ) == 0 )
-        {
-            if( BSON_ITER_HOLDS_BOOL( i_map ) && bson_iter_bool( i_map ) )
-            {
-                return 1;
-            }
-        }
         if( strcmp( key, "tgt" ) == 0 )
         {
             if( BSON_ITER_HOLDS_UTF8( i_map ) )
