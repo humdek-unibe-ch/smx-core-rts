@@ -74,7 +74,7 @@ $(DYNLIB): $(OBJECTS)
 
 # compile project
 $(LOC_OBJ_DIR)/%.o: $(LOC_SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCLUDES_DIR) -c $< -o $@ $(LINK_DIR) $(LINK_FILE)
+	$(CC) $(CFLAGS) $(INCLUDES_DIR) -c $< -o $@
 
 .PHONY: clean install uninstall doc directories
 
