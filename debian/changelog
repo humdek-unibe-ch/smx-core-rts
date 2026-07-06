@@ -1,3 +1,10 @@
+libsmxrts1.5 (1.5.2-1) bookworm; urgency=medium
+
+  * allow to disable lab map items
+  * Create documentation files for new release v1.5.2
+
+ -- Simon Maurer <simon.maurer@unibe.ch>  Mon, 06 Jul 2026 14:41:01 +0000
+
 libsmxrts1.5 (1.5.1-1) bookworm; urgency=medium
 
   * allow more flexibility for source channels
