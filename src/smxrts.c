@@ -299,7 +299,7 @@ int smx_program_init_maps( const char* path, bson_t* doc, bson_iter_t* i_maps,
     }
 
     if( !bson_iter_init_find( i_maps, doc, "maps" )
-            && BSON_ITER_HOLDS_ARRAY( &iter ) )
+            && BSON_ITER_HOLDS_ARRAY( i_maps ) )
     {
         SMX_LOG_MAIN( main, error,
                 "missing mandatory key 'maps' in app config map" );

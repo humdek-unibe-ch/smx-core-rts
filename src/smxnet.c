@@ -496,6 +496,24 @@ int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h )
 }
 
 /*****************************************************************************/
+smx_channel_t* smx_net_source_ch( smx_net_t* net, int idx )
+{
+    smx_channel_err_t err = 0;
+    if( idx < 0 || idx >= net->sig->source.count )
+    {
+        err = SMX_CHANNEL_ERR_BAD_IDX;
+        goto error;
+    }
+
+    return net->sig->source.items[idx].port;
+
+error:
+    SMX_LOG( net, warn, "failed to get source port channel at index %d: %d",
+            idx, err );
+    return NULL;
+}
+
+/*****************************************************************************/
 int smx_net_source_add( smx_net_t* net, int len, struct timespec* timeout,
         int* idx )
 {
@@ -544,8 +562,10 @@ error:
 /*****************************************************************************/
 int smx_net_source_disable( smx_net_t* net, int idx )
 {
+    smx_channel_err_t err = 0;
     if( idx < 0 || idx >= net->sig->source.count )
     {
+        err = SMX_CHANNEL_ERR_BAD_IDX;
         goto error;
     }
 
@@ -556,15 +576,18 @@ int smx_net_source_disable( smx_net_t* net, int idx )
     return 0;
 
 error:
-    SMX_LOG( net, warn, "failed to disable source port at index %d", idx );
+    SMX_LOG( net, warn, "failed to disable source port at index %d: %d",
+            idx, err );
     return -1;
 }
 
 /*****************************************************************************/
 int smx_net_source_enable( smx_net_t* net, int idx )
 {
+    smx_channel_err_t err = 0;
     if( idx < 0 || idx >= net->sig->source.count )
     {
+        err = SMX_CHANNEL_ERR_BAD_IDX;
         goto error;
     }
 
@@ -575,7 +598,8 @@ int smx_net_source_enable( smx_net_t* net, int idx )
     return 0;
 
 error:
-    SMX_LOG( net, warn, "failed to enable source port at index %d", idx );
+    SMX_LOG( net, warn, "failed to enable source port at index %d: %d",
+            idx, err );
     return -1;
 }
 
@@ -614,8 +638,10 @@ error:
 int smx_net_source_register_callback( smx_net_t* net, int idx,
         smx_source_callback_t callback )
 {
+    smx_channel_err_t err = 0;
     if( idx < 0 || idx >= net->sig->source.count )
     {
+        err = SMX_CHANNEL_ERR_BAD_IDX;
         goto error;
     }
     net->sig->source.items[idx].callback = callback;
@@ -626,8 +652,8 @@ int smx_net_source_register_callback( smx_net_t* net, int idx,
 
 error:
     SMX_LOG( net, warn,
-            "failed to register callback to source port at index %d",
-            idx );
+            "failed to register callback to source port at index %d: %d",
+            idx, err );
     return -1;
 }
 
