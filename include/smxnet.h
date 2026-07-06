@@ -369,6 +369,18 @@ void smx_net_report_rate_warning( smx_net_t* h );
 int smx_net_run( pthread_t* ths, int idx, void* box_impl( void* arg ), void* h );
 
 /**
+ * Get a pointer to the source channel.
+ *
+ * @param net
+ *  A pointer to the net instance.
+ * @param idx
+ *  The index of the source port.
+ * @return
+ *  A pointer to the source channel or NULL on failure.
+ */
+smx_channel_t* smx_net_source_ch( smx_net_t* net, int idx );
+
+/**
  * Add a source queue to the net.
  *
  * @param net

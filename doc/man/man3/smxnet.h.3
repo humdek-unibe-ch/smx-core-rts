@@ -1,4 +1,4 @@
-.TH "include/smxnet.h" 3 "Version v1.5.0" "libsmxrts" \" -*- nroff -*-
+.TH "include/smxnet.h" 3 "Version v1.5.1" "libsmxrts" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
@@ -92,6 +92,9 @@ include/smxnet.h
 .RI "int \fBsmx_net_run\fP (pthread_t *ths, int idx, void *box_impl(void *arg), void *h)"
 .br
 .RI "create pthred of net "
+.ti -1c
+.RI "smx_channel_t * \fBsmx_net_source_ch\fP (smx_net_t *net, int idx)"
+.br
 .ti -1c
 .RI "int \fBsmx_net_source_add\fP (smx_net_t *net, int len, struct timespec *timeout, int *idx)"
 .br
@@ -592,6 +595,22 @@ Add a source queue to the net\&.
 \fBReturns\fP
 .RS 4
 0 on success, -1 on failure\&. 
+.RE
+.PP
+
+.SS "smx_channel_t * smx_net_source_ch (smx_net_t * net, int idx)"
+Get a pointer to the source channel\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInet\fP A pointer to the net instance\&. 
+.br
+\fIidx\fP The index of the source port\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+A pointer to the source channel or NULL on failure\&. 
 .RE
 .PP
 

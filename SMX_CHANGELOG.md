@@ -1,7 +1,16 @@
 # Changelog
 
 -------------------
-## `v1.5.0` (latest)
+## `v1.5.1` (latest)
+
+### New Features
+- Add source channel utility functions to improve flexibility.
+
+### Bug Fixes
+- Fix map initialisation.
+
+-------------------
+## `v1.5.0`
 
 ### Improvement
 - Improve licensing annotations.
