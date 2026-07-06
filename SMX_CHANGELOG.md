@@ -1,7 +1,13 @@
 # Changelog
 
 -------------------
-## `v1.5.1` (latest)
+## `v1.5.2` (latest)
+
+### New Features
+- Allow to disable map items with the `disbled` key.
+
+-------------------
+## `v1.5.1`
 
 ### New Features
 - Add source channel utility functions to improve flexibility.
